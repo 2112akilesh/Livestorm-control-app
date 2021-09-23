@@ -31,3 +31,9 @@ cd Livestorm-control-app
 npm i
 ionic start
 ```
+
+## Screen shots
+
+![Livestorm app slide 1](src/assets/readme/slider 1.jpg)
+![Livestorm app slide 2](src/assets/readme/slider 2.jpg)
+![Livestorm app slide 3](src/assets/readme/slider 3.jpg)
