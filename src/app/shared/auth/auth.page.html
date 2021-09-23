@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Livestorm Control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="login()" [formGroup]="credentials">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="organizationId" placeholder="organizationId" formControlName="organizationId"></ion-input>
+      </ion-item>
+
+      <div *ngIf="(organizationId.dirty || organizationId.touched) && organizationId.errors" class="errors">
+        <span *ngIf="organizationId.errors?.required">organization id is required</span>
+        <span *ngIf="organizationId.errors?.organizationId">organization id is invalid</span>
+      </div>
+
+    </div>
+
+    <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Let's go</ion-button>
+    <ion-button type="button" (click)="openauthorization()" expand="block"
+      fill="clear">
+      How to obtain a Livestorm API token
+    </ion-button>
+    <ion-button type="button" (click)="openGetOrganization()"
+      expand="block" fill="clear">
+      where to find your organization id
+    </ion-button>
+
+
+  </form>
+
+
+</ion-content>

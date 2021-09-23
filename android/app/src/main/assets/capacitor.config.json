@@ -1,0 +1,6 @@
+{
+	"appId": "com.controller.app",
+	"appName": "controller",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
