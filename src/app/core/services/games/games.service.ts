@@ -2,18 +2,35 @@ import { Injectable } from '@angular/core';
 
 import { Http } from '@capacitor-community/http';
 
+import { Storage } from '@capacitor/storage';
+
+const TOKEN_KEY = 'my-token';
+const API_TOKEN = 'my-api-token';
 @Injectable({
   providedIn: 'root'
 })
 export class GamesService {
-  constructor() { }
+  orgId = '';
+  apiToken = '';
+  constructor() {
+    this.loadToken();
+  }
 
+
+  async loadToken() {
+    const orgId = await Storage.get({ key: TOKEN_KEY });
+    const apiToken = await Storage.get({ key: API_TOKEN });
+    if (orgId && orgId.value && apiToken && apiToken.value) {
+      this.orgId = orgId.value;
+      this.apiToken = apiToken.value;
+    }
+  }
   async getGames(gameUrl) {
     //Body
     const body = {
       scope: {
         type: 'organization',
-        organization_id: '6e1f9bbc-d7f9-49da-8364-45feef4ab8ad'
+        organization_id: `${this.orgId}`
       },
       payload: {
         event: {
@@ -29,7 +46,7 @@ export class GamesService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiMjVlNGFjYjUtZDliYi00NGIxLWE2YTUtYzNhYjdkMGIzZWMzIiwiaWF0IjoxNjMxNDQwNTY0LCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.NfCm-IC_9zempZIBhiqTI6kNqgzVSk801shnZ1gtSFE'
+        'Authorization': `${this.apiToken}`
       },
       url: 'https://plugins.livestorm.co/api/v1/pub_subs',
       data: JSON.stringify(body)

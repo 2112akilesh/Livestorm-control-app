@@ -1,6 +1,9 @@
 {
 	"appId": "com.controller.app",
 	"appName": "controller",
-	"webDir": "www",
-	"bundledWebRuntime": false
+	"webDir": "src",
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://192.168.131.240:8100"
+	}
 }

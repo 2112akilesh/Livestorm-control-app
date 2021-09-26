@@ -12,7 +12,7 @@ import { Platform } from '@ionic/angular';
 export class ApiService {
 
 
-  base64String:string = '';
+  capturedBase64String = '';
 
   constructor() { }
 
@@ -25,10 +25,9 @@ export class ApiService {
       quality: 100 // highest quality (0 to 100)
     });
 
-    this.base64String = 'data:image/jpeg;base64,'+capturedPhoto.base64String;
+    return this.capturedBase64String = 'data:image/jpeg;base64,'+capturedPhoto.base64String;
 
-    //console.log(this.base64String);
-
+    //console.log(this.capturedBase64String);
   }
 
   public async getGallery() {

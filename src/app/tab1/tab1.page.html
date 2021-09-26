@@ -14,14 +14,14 @@
       <ion-row>
 
         <ion-img *ngIf="base64String" [src]="base64String" alt="beautiful"></ion-img>
-        <ion-img *ngIf="apiService.base64String" [src]="apiService.base64String" alt="beautiful"></ion-img>
+        <ion-img *ngIf="apiService.capturedBase64String" [src]="apiService.base64String" alt="beautiful"></ion-img>
 
-        <ion-button *ngIf="base64String || apiService.base64String" color="primary"
-                    (click)="uploadImage(base64String, apiService.base64String) ">
+        <ion-button *ngIf="base64String || apiService.capturedBase64String" color="primary"
+                    (click)="uploadImage(base64String, apiService.capturedBase64String) ">
           <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
         </ion-button>
 
-        <ion-button *ngIf="base64String || apiService.base64String" fill="clear" (click)="deleteImage(img, pos)">
+        <ion-button *ngIf="base64String || apiService.capturedBase64String" fill="clear" (click)="deleteImage(img, pos)">
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
 

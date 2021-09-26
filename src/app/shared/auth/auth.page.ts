@@ -20,7 +20,7 @@ export class AuthPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private router: Router,
     private loadingController: LoadingController,
     private alertController: AlertController
@@ -28,7 +28,8 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      organizationId: ['6e1f9bbc-d7f9-49da-8364-45feef4ab8ad', [Validators.required, Validators.minLength(27)]],
+      organizationId: ['', [Validators.required, Validators.minLength(30)]],
+      apiToken: ['', [Validators.required, Validators.minLength(40)]]
     });
   }
 
@@ -36,7 +37,7 @@ export class AuthPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.authService.login(this.credentials.value)
+    this.authenticationService.login(this.credentials.value)
       .then( () => {
          this.router.navigateByUrl('/tabs', { replaceUrl: true }).then(() => {
            loading.dismiss();
@@ -48,12 +49,16 @@ export class AuthPage implements OnInit {
   get organizationId() {
     return this.credentials.get('organizationId');
   }
+  get apiToken() {
+    return this.credentials.get('apiToken');
+  }
+
 
   async openauthorization(){
     await Browser.open({ url: 'https://developers.livestorm.co/docs/authorization' });
   }
   async openGetOrganization(){
-    await Browser.open({ url: 'https://developers.livestorm.co/docs/authorization' });
+    await Browser.open({ url: 'https://developers.livestorm.co/reference/get_organization' });
   }
 
 }

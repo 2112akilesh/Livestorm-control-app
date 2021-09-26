@@ -15,6 +15,8 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
+import { FileSenderComponent } from '../shared/file-sender/file-sender.component';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -22,7 +24,10 @@ import { Camera } from '@ionic-native/camera/ngx';
     FormsModule,
     Tab1PageRoutingModule,
   ],
-  declarations: [Tab1Page],
+  declarations: [
+    Tab1Page,
+    FileSenderComponent
+  ],
   providers: [
     PubsubService,
     ApiService,

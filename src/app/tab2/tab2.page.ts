@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
 
-
 import { IonSelect } from '@ionic/angular';
 
 import { Storage } from '@capacitor/storage';
@@ -13,6 +12,7 @@ import { AuthenticationService } from '../core/services/authentication/authentic
 import { GamesService } from '../core/services/games/games.service';
 
 const TOKEN_KEY = 'my-token';
+const API_TOKEN = 'my-api-token';
 
 @Component({
   selector: 'app-tab2',
@@ -23,42 +23,57 @@ export class Tab2Page {
 
   @ViewChild('gameList') selectRef: IonSelect;
   showList = true;
+  token = '';
+  apiToken = '';
 
   public toggleTextBox = true;
   public toggleMicButton = true;
   public toggleCamButton = true;
   storageName = '';
-
+  asdf: Promise<any>;
   constructor(
-    private authService: AuthenticationService,
+    private authenticationService: AuthenticationService,
     private router: Router,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    public gamesService: GamesService
-    //public storage: Storage
-  ) { }
+    public gamesService: GamesService,
+  ) {
+    this.loadToken();
+  }
 
+
+  async loadToken() {
+    const token = await Storage.get({ key: TOKEN_KEY });
+    const apiToken = await Storage.get({ key: API_TOKEN });
+    if (token && token.value && apiToken && apiToken.value) {
+      console.log('set token: ', token.value);
+      this.token = token.value;
+      this.apiToken = apiToken.value;
+    }
+  }
 
   //Toggling the buttons functions
-  async enableEdit(active: boolean) {
+
+  async enableEdit(ordId: any, apiToken: any) {
     this.toggleTextBox = !this.toggleTextBox;
   }
+
   disableEdit(active: boolean) {
     this.toggleTextBox = !this.toggleTextBox;
   }
 
-  enableMic() {
-    this.toggleMicButton = !this.toggleMicButton;
-  }
-  enableCam() {
-    this.toggleCamButton = !this.toggleCamButton;
-  }
+  //const MyToken = Storage.get({ key: 'my-token' });
 
+  // enableMic() {
+  //   this.toggleMicButton = !this.toggleMicButton;
+  // }
+  // enableCam() {
+  //   this.toggleCamButton = !this.toggleCamButton;
+  // }
 
-
-
+  //---------------Logout section-----------------
   async logout() {
-    await this.authService.logout();
+    await this.authenticationService.logout();
     this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
@@ -67,7 +82,7 @@ export class Tab2Page {
     this.selectRef.open();
   }
 
-  startGame(startGame) {           //Function to choose the game
+  startGame(startGame: string) {           //Function to choose the game
     if (startGame === 'game-1') {
       const gameUrl = 'https://playpager.com/embed/checkers/index.html';
       this.gamesService.getGames(gameUrl);
@@ -75,7 +90,7 @@ export class Tab2Page {
       const gameUrl = 'https://playpager.com/embed/chess/index.html';
       this.gamesService.getGames(gameUrl);
     } else {
-      alert('baka ');
+      alert('Something is not Daijobu');
     }
   }
 

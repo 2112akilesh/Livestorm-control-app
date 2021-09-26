@@ -8,8 +8,19 @@
 
   <form (ngSubmit)="login()" [formGroup]="credentials">
     <div class="input-group">
+
       <ion-item>
-        <ion-input type="organizationId" placeholder="organizationId" formControlName="organizationId"></ion-input>
+        <ion-input color="secondary" type="url" placeholder="API Token" formControlName="apiToken"></ion-input>
+      </ion-item>
+
+      <div *ngIf="(apiToken.dirty || apiToken.touched) && apiToken.errors" class="errors">
+        <span *ngIf="apiToken.errors?.required">API Token id is required</span>
+        <span *ngIf="apiToken.errors?.apiToken">API Token id is invalid</span>
+      </div>
+
+
+      <ion-item>
+        <ion-input color="secondary" type="text" placeholder="Organization Id" formControlName="organizationId"></ion-input>
       </ion-item>
 
       <div *ngIf="(organizationId.dirty || organizationId.touched) && organizationId.errors" class="errors">
@@ -17,15 +28,14 @@
         <span *ngIf="organizationId.errors?.organizationId">organization id is invalid</span>
       </div>
 
+
     </div>
 
     <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Let's go</ion-button>
-    <ion-button type="button" (click)="openauthorization()" expand="block"
-      fill="clear">
+    <ion-button type="button" (click)="openauthorization()" expand="block" fill="clear">
       How to obtain a Livestorm API token
     </ion-button>
-    <ion-button type="button" (click)="openGetOrganization()"
-      expand="block" fill="clear">
+    <ion-button type="button" (click)="openGetOrganization()" expand="block" fill="clear">
       where to find your organization id
     </ion-button>
 

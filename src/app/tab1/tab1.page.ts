@@ -13,7 +13,6 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 //importing chat services
 import { PubsubService } from '../core/services/post/pubsub.service';
 import { ApiService, UserPhoto } from '../core/services/postImage/post-image.service';
-import { empty } from 'rxjs';
 
 
 
@@ -24,9 +23,11 @@ import { empty } from 'rxjs';
 })
 export class Tab1Page {
 
+  images = [];
 
-  base64String: string = '';
-  chatMessage='';
+  base64String = '';
+  chatMessage = '';
+
   constructor(
     public pubsubService: PubsubService,
     public apiService: ApiService,
@@ -35,48 +36,10 @@ export class Tab1Page {
     private fileChooser: FileChooser
   ) { }
 
-  // async submitForm() {
-  //   Http.uploadFile({
-  //     url: 'https://plugins.livestorm.co/api/v1/pub_subs',
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiMjVlNGFjYjUtZDliYi00NGIxLWE2YTUtYzNhYjdkMGIzZWMzIiwiaWF0IjoxNjMxNDQwNTY0LCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.NfCm-IC_9zempZIBhiqTI6kNqgzVSk801shnZ1gtSFE'
-  //     },
-  //     name: 'thorn',
-  //     filePath: this.file.name,
-  //   });
-  // }
-
-  // submitForm() {
-  //   return Http.uploadFile({
-  //     url: 'https://plugins.livestorm.co/api/v1/pub_subs',
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiMjVlNGFjYjUtZDliYi00NGIxLWE2YTUtYzNhYjdkMGIzZWMzIiwiaWF0IjoxNjMxNDQwNTY0LCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.NfCm-IC_9zempZIBhiqTI6kNqgzVSk801shnZ1gtSFE'
-  //     },
-  //     name: '',
-  //     filePath: this.file,
-  //   });
-
-
-  //   const uploadFile = async () => {
-  //     const options = {
-  //       url: 'https://plugins.livestorm.co/api/v1/pub_subs',
-  //       name: 'myFile',
-  //       filePath: 'document.pdf',
-  //       fileDirectory: FilesystemDirectory.Downloads,
-  //     };
-
-  //     const response: HttpUploadFileResult = await Http.uploadFile();
-  //   };
-  // }
-
   //Button click upload function
 
 
-  //----------------Services function-----------------
+  //----------------Services function------------------------
   uploadMessage(chatMessage) {
     const chat = chatMessage;
     this.pubsubService.sendMessage(chat);
@@ -85,8 +48,9 @@ export class Tab1Page {
 
   uploadImage(gallary, camera) {
     console.log(gallary, camera);
-    if (gallary === empty) {
-      this.pubsubService.sendImages(camera);
+    if (gallary === null) {
+      this.pubsubService.sendImages(this.apiService.capturedBase64String);
+      console.log(this.apiService.capturedBase64String);
     } else {
       this.pubsubService.sendImages(this.base64String);
     }
@@ -95,6 +59,7 @@ export class Tab1Page {
   //----------------capasitor/cordova function-----------------
   addPhotoToGallery() {
     this.apiService.addNewToGallery();
+    //console.log (this.apiService.capturedBase64String);
   }
 
   selectFromGallery() {

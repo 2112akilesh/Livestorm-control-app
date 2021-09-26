@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,14 +10,20 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary" fixed>Org ID:</ion-label>
-      <ion-input [disabled]="toggleTextBox" color="dark" value="{{authService.token}}"></ion-input>
+      <ion-input [disabled]="toggleTextBox" color="dark" [(ngModel)]="OrdId" value="{{token}}"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed>API Tok:</ion-label>
+      <ion-input [disabled]="toggleTextBox" color="dark" [(ngModel)]="ApiToken" value="{{apiToken}}">
+      </ion-input>
+    </ion-item>
+
     <ion-button class="edit-button" *ngIf="!toggleTextBox" fill="clear" (click)="disableEdit()">
       <ion-icon name="close-circle-outline"></ion-icon>
     </ion-button>
     <ion-button class="edit-button" color="primary" (click)="enableEdit()">
       <ion-icon *ngIf="toggleTextBox" name="create-outline"></ion-icon>
-      <ion-icon *ngIf="!toggleTextBox" name="checkmark-outline"></ion-icon>
+      <ion-icon *ngIf="!toggleTextBox"  name="checkmark-outline"></ion-icon>
     </ion-button>
   </ion-list>
 

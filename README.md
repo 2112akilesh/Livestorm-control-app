@@ -32,8 +32,8 @@ npm i
 ionic start
 ```
 
-## Screen shots
 
-![Livestorm app slide 1](src/assets/readme/slider 1.jpg)
-![Livestorm app slide 2](src/assets/readme/slider 2.jpg)
-![Livestorm app slide 3](src/assets/readme/slider 3.jpg)
+## Screen shots
+<img src="https://github.com/2112akilesh/Livestorm-control-app/blob/main/src/assets/readme/slider%201.jpg" />
+<img src="https://github.com/2112akilesh/Livestorm-control-app/blob/main/src/assets/readme/slider%202.jpg" />
+<img src="https://github.com/2112akilesh/Livestorm-control-app/blob/main/src/assets/readme/slider%203.jpg" />
