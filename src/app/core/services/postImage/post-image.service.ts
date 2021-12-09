@@ -17,7 +17,7 @@ export class ApiService {
   constructor() { }
 
 
-  public async addNewToGallery() {
+  public async getFromCamera() {
     // Take a photo
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Base64, // file-based data; provides best performance
@@ -25,14 +25,11 @@ export class ApiService {
       quality: 100 // highest quality (0 to 100)
     });
 
-    return this.capturedBase64String = 'data:image/jpeg;base64,'+capturedPhoto.base64String;
+    return this.capturedBase64String = 'data:image/jpeg;base64,'+ capturedPhoto.base64String;
 
     //console.log(this.capturedBase64String);
   }
 
-  public async getGallery() {
-
-  }
 }
 export interface UserPhoto {
   filepath: string;

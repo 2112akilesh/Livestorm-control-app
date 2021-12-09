@@ -57,13 +57,12 @@ export class Tab1Page {
   }
 
   //----------------capasitor/cordova function-----------------
-  addPhotoToGallery() {
-    this.apiService.addNewToGallery();
+  takeFromCamera() {
+    this.apiService.getFromCamera();
     //console.log (this.apiService.capturedBase64String);
   }
 
   selectFromGallery() {
-
     this.fileChooser.open().then((val) => {
       this.filePath.resolveNativePath(val).then((path) => {
         Filesystem.readFile({
