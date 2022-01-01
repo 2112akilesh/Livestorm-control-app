@@ -1,25 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
-
 import { IonSelect } from '@ionic/angular';
 
 import { Storage } from '@capacitor/storage';
 
 //Importing services
-import { AuthenticationService } from '../core/services/authentication/authentication.service';
-import { GamesService } from '../core/services/games/games.service';
+import { AuthenticationService } from '../../core/services/authentication/authentication.service';
+import { GamesService } from '../../core/services/games/games.service';
 
 const TOKEN_KEY = 'my-token';
 const API_TOKEN = 'my-api-token';
 
 @Component({
   selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  templateUrl: 'meet.page.html',
+  styleUrls: ['meet.page.scss']
 })
-export class Tab2Page {
+export class MeetPage {
 
   @ViewChild('gameList') selectRef: IonSelect;
   showList = true;
@@ -34,8 +32,6 @@ export class Tab2Page {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private loadingController: LoadingController,
-    private alertController: AlertController,
     public gamesService: GamesService,
   ) {
     this.loadToken();

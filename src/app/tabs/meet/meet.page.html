@@ -3,10 +3,14 @@
     <ion-title>
       Profile
     </ion-title>
+     <ion-buttons slot="end">
+      <app-popover-controller></app-popover-controller>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
   <ion-list>
     <ion-item>
       <ion-label color="primary" fixed>Org ID:</ion-label>

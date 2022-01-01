@@ -2,20 +2,20 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { ChatPage } from './chat.page';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { Tab1PageRoutingModule } from './chat-routing.module';
 
 //declaring services
-import { PubsubService } from '../core/services/post/pubsub.service';
-import { ApiService } from '../core/services/postImage/post-image.service';
+import { PubsubService } from '../../core/services/post/pubsub.service';
+import { ApiService } from '../../core/services/postImage/post-image.service';
 
 
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
-import { FileSenderComponent } from '../shared/file-sender/file-sender.component';
+import { FileSenderComponent } from '../../shared/file-sender/file-sender.component';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { FileSenderComponent } from '../shared/file-sender/file-sender.component
     Tab1PageRoutingModule,
   ],
   declarations: [
-    Tab1Page,
+    ChatPage,
     FileSenderComponent
   ],
   providers: [
@@ -36,4 +36,4 @@ import { FileSenderComponent } from '../shared/file-sender/file-sender.component
     Camera
   ]
 })
-export class Tab1PageModule { }
+export class ChatPageModule { }

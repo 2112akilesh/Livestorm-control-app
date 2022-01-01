@@ -9,11 +9,11 @@ const routes: Routes = [
     children: [
       {
         path: 'SendData',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatPageModule)
       },
       {
         path: 'Profile',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('./meet/meet.module').then(m => m.MeetPageModule)
       },
       {
         path: '',

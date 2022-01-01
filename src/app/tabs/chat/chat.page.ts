@@ -1,27 +1,27 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Platform, ActionSheetController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 
 //Import capasitor plugin
-import { Directory, Filesystem } from '@capacitor/filesystem';
-import { CameraSource, Camera, CameraResultType } from '@capacitor/camera';
-import { Http, HttpUploadFileResult } from '@capacitor-community/http';
+import { Filesystem } from '@capacitor/filesystem';
+//import { CameraSource, Camera, CameraResultType } from '@capacitor/camera';
+//import { Http, HttpUploadFileResult } from '@capacitor-community/http';
 
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 //import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 
 //importing chat services
-import { PubsubService } from '../core/services/post/pubsub.service';
-import { ApiService, UserPhoto } from '../core/services/postImage/post-image.service';
+import { PubsubService } from '../../core/services/post/pubsub.service';
+import { ApiService } from '../../core/services/postImage/post-image.service';
 
 
 
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  templateUrl: 'chat.page.html',
+  styleUrls: ['chat.page.scss']
 })
-export class Tab1Page {
+export class ChatPage {
 
   images = [];
 

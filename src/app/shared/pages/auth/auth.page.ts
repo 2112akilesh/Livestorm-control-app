@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { Browser } from '@capacitor/browser';
 
 
 //import auth service
-import { AuthenticationService } from '../../core/services/authentication/authentication.service';
+import { AuthenticationService } from '../../../core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +23,6 @@ export class AuthPage implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private loadingController: LoadingController,
-    private alertController: AlertController
   ) { }
 
   ngOnInit() {

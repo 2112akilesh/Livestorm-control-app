@@ -1,5 +1,5 @@
 {
-  "name": "controller",
+  "name": "control",
   "integrations": {
     "capacitor": {},
     "cordova": {}
