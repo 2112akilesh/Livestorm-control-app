@@ -24,3 +24,62 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* Importing swiper css bundle */
+@import 'swiper/css/bundle';
+
+
+/* Importing custom fonts */
+@font-face {
+  font-family: Inter;
+  src: url("./assets/fonts/Inter/Inter-SemiBold.woff");
+}
+
+:root {
+  // // Set the background of the entire app
+  // --ion-background-color: #000;
+
+  // // Set the default text color
+  // --ion-text-color: #fff;
+
+  // Set the font family of the entire app
+  --ion-font-family: Interitalic;
+}
+/* Livestorm custom colours */
+
+.ion-color-livestorm-dark-prime {
+  --ion-color-base: var(--ion-color-livestorm-dark-prime);
+  --ion-color-base-rgb: var(--ion-color-livestorm-dark-prime-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-dark-prime-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-dark-prime-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-dark-prime-shade);
+  --ion-color-tint: var(--ion-color-livestorm-dark-prime-tint);
+}
+
+.ion-color-livestorm-prime {
+  --ion-color-base: var(--ion-color-livestorm-prime);
+  --ion-color-base-rgb: var(--ion-color-livestorm-prime-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-prime-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-prime-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-prime-shade);
+  --ion-color-tint: var(--ion-color-livestorm-prime-tint);
+}
+
+.ion-color-livestorm-green {
+  --ion-color-base: var(--ion-color-livestorm-green);
+  --ion-color-base-rgb: var(--ion-color-livestorm-green-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-green-shade);
+  --ion-color-tint: var(--ion-color-livestorm-green-tint);
+}
+
+.ion-color-livestorm-light-blue {
+  --ion-color-base: var(--ion-color-livestorm-light-blue);
+  --ion-color-base-rgb: var(--ion-color-livestorm-light-blue-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-light-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-light-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-light-blue-shade);
+  --ion-color-tint: var(--ion-color-livestorm-light-blue-tint);
+}
+

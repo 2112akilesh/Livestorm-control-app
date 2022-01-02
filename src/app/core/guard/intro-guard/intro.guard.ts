@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router , UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanLoad, Router } from '@angular/router';
 
 import { Storage } from '@capacitor/storage';
 
@@ -16,7 +15,8 @@ export class IntroGuard implements CanLoad {
 
   async canLoad(): Promise<boolean> {
     const hasSeenIntro = await Storage.get({key: INTRO_KEY});
-    if (hasSeenIntro && (hasSeenIntro.value === 'true')) {
+    // Change it to true after updating intro part
+    if (hasSeenIntro && (hasSeenIntro.value === 'false')) {
       return true;
     } else {
       this.router.navigateByUrl('/intro', { replaceUrl:true });

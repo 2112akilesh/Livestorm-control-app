@@ -1,12 +1,87 @@
-ion-content {
-    --background: #0081ca;
+ion-toolbar {
+  --background: transparent;
 }
- 
-ion-slides {
-    height: 100%;
-    --bullet-background-active: #fff;
-    --bullet-background: #000;
+
+svg{
+  padding-left: 10px;
 }
-ion-slide ion-text img{
-    height: 20em;
+
+ion-buttons > ion-button {
+  font-family: 'Inter';
 }
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.69) 0%,
+      rgba(0, 0, 0, 0.65) 39%,
+      rgba(0, 0, 0, 0) 64%,
+      rgba(0, 0, 0, 0.54) 95%,
+      rgba(0, 0, 0, 0.72) 100%
+  ),
+  url("../../../../assets/images/White-pattern.png " ) no-repeat center center / cover;
+}
+
+#introswiper.swiper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+}
+
+#introswiper > .swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px;
+
+  text-align: center;
+
+  p {
+    font-family: 'Inter';
+    margin-top: 20px;
+    font-size: large;
+  }
+
+  &:first-child {
+    margin-top: 50px;
+  }
+}
+
+.swiper-pagination-bullet {
+  background: var(--ion-color-livestorm-light-blue);
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--ion-color-livestorm-dark-prime);
+}
+
+.swiper-pagination-bullets {
+  bottom: calc(80px + var(--ion-safe-area-bottom)) !important;
+}
+
+.intro-page {
+  height: 200vh;
+  width: 100%;
+  position: absolute;
+  background: rgba(231, 240, 255, 1);
+  z-index: -1;
+}
+
+.reset-bg {
+  transform: translateX(0px) !important;
+  transition: 0.5s;
+}
+
+.reset-bg-out {
+  transform: translateX(-600px) !important;
+  transition: 1.2s;
+}
+
