@@ -31,22 +31,55 @@
 
 /* Importing custom fonts */
 @font-face {
-  font-family: Inter;
-  src: url("./assets/fonts/Inter/Inter-SemiBold.woff");
+  font-family: InterRegular;
+  src: url("./assets/fonts/Inter/Inter-Regular.woff2");
+}
+@font-face {
+  font-family: InterBlack;
+  src: url("./assets/fonts/Inter/Inter-Black.woff2");
+}
+@font-face {
+  font-family: InterSemiBold;
+  src: url("./assets/fonts/Inter/Inter-SemiBold.woff2");
 }
 
+@font-face {
+  font-family: SanRegular;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: SanSemiBold;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-SemiBold.ttf");
+}
+@font-face {
+  font-family: SanLight;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-Light.ttf");
+}
+
+
+/* Livestorm Typography */
 :root {
   // // Set the background of the entire app
   // --ion-background-color: #000;
 
   // // Set the default text color
   // --ion-text-color: #fff;
-
+  
   // Set the font family of the entire app
-  --ion-font-family: Interitalic;
+  --ion-font-family: Inter;
 }
-/* Livestorm custom colours */
 
+h1,
+h2,
+h3 {
+  font-size: 32px;
+  font-weight: 500;
+  font-family: InterSemiBold;
+  line-height: 40px;
+}
+
+
+/* Livestorm custom colours */
 .ion-color-livestorm-dark-prime {
   --ion-color-base: var(--ion-color-livestorm-dark-prime);
   --ion-color-base-rgb: var(--ion-color-livestorm-dark-prime-rgb);

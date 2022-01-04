@@ -33,10 +33,9 @@
             ],
             "styles": [
               "src/theme/variables.scss",
-              "src/global.scss",
-              "src/assets/fonts/Inter/inter.scss"
+              "src/global.scss"
             ],
-            "scripts": [ ],
+            "scripts": [],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

@@ -15,8 +15,8 @@ export class IntroGuard implements CanLoad {
 
   async canLoad(): Promise<boolean> {
     const hasSeenIntro = await Storage.get({key: INTRO_KEY});
-    // Change it to true after updating intro part
-    if (hasSeenIntro && (hasSeenIntro.value === 'false')) {
+    // Change it to true || false to view the intro on startup
+    if (hasSeenIntro && (hasSeenIntro.value === 'true')) {
       return true;
     } else {
       this.router.navigateByUrl('/intro', { replaceUrl:true });

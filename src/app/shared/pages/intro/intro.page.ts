@@ -29,17 +29,17 @@ export class IntroPage implements OnInit {
     {
       title: 'Chat & Share',
       text: 'Share multiple photos, documents, presentation from your mobile device',
-      img: '../../../../assets/icon/favicon.png',
+      img: '../../../../assets/images/Chat.jpg',
     },
     {
-      title: 'Create engaging events',
+      title: 'Create & Connect',
       text: 'Create a meeting from mobile and invite your contacts.',
-      img: '../../../../assets/icon/favicon.png',
+      img: '../../../../assets/images/Create.jpg',
     },
     {
-      title: 'Stream from mobile',
+      title: 'Stream from Mobile',
       text: 'Use your mobile like a 2nd camera to stream.',
-      img: '../../../../assets/icon/favicon.png',
+      img: '../../../../assets/images/Engaging.jpg',
     },
   ];
   constructor(

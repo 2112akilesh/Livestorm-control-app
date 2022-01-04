@@ -7,7 +7,7 @@ svg{
 }
 
 ion-buttons > ion-button {
-  font-family: 'Inter';
+  font-family: InterBold;
 }
 
 .bg {
@@ -15,15 +15,7 @@ ion-buttons > ion-button {
   height: 100%;
   position: absolute;
   top: 0px;
-  background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.69) 0%,
-      rgba(0, 0, 0, 0.65) 39%,
-      rgba(0, 0, 0, 0) 64%,
-      rgba(0, 0, 0, 0.54) 95%,
-      rgba(0, 0, 0, 0.72) 100%
-  ),
-  url("../../../../assets/images/White-pattern.png " ) no-repeat center center / cover;
+  background: url("../../../../assets/images/Sunburst_Red-pattern.png" ) no-repeat center center / cover;
 }
 
 #introswiper.swiper {
@@ -43,9 +35,9 @@ ion-buttons > ion-button {
   text-align: center;
 
   p {
-    font-family: 'Inter';
+    font-family: SanRegular;
     margin-top: 20px;
-    font-size: large;
+    font-size: 1.125rem;
   }
 
   &:first-child {
