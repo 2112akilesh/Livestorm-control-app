@@ -4,33 +4,29 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 //Importing routing module
-import {PopoverRoutingModule} from './popover-controller/popover-routing.module';
+import { RouterModule } from '@angular/router';
 
 //Importing the component
-import {DarkModeToggleComponent} from './pages/settings/dark-mode-toggle/dark-mode-toggle.component';
-import {PopoverControllerComponent} from './popover-controller/popover-controller.component';
-import {PopoverDialogueComponent} from './popover-controller/popover-dialogue.component';
+import {PopoverControllerComponent} from './components/popover-controller/popover-controller.component';
+import {PopoverDialogueComponent} from './components/popover-controller/popover-dialogue.component';
 
 //Importing pages
-import { SettingsPage } from './pages/settings/settings.page';
+import { SettingsPageModule } from './pages/settings/settings.page.module';
 
 @NgModule({
     declarations: [
-      DarkModeToggleComponent,
       PopoverControllerComponent,
       PopoverDialogueComponent,
-      SettingsPage,
     ],
     imports: [
       IonicModule,
       CommonModule,
-      PopoverRoutingModule,          //Routing module
+      RouterModule,          //Routing module
+      SettingsPageModule
     ],
     exports: [
-      DarkModeToggleComponent,
       PopoverControllerComponent,
       PopoverDialogueComponent,
-      SettingsPage,
     ]
   })
 

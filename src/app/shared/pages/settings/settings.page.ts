@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
 export class SettingsPage implements OnInit {
 
   constructor(public router: Router) { }
-  // goBack() {
-  //   this.router.navigate(['/Profile']).then(m => m.ProfilePage);
-  // }
+
   ngOnInit() {
   }
 

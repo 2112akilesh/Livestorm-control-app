@@ -8,23 +8,23 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'SendData',
+        path: 'chat',
         loadChildren: () => import('./chat/chat.module').then(m => m.ChatPageModule)
       },
       {
-        path: 'Profile',
+        path: 'meet',
         loadChildren: () => import('./meet/meet.module').then(m => m.MeetPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/SendData',
+        redirectTo: '/tabs/chat',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/SendData',
+    redirectTo: '/tabs/chat',
     pathMatch: 'full'
   }
 ];

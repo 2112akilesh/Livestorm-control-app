@@ -14,4 +14,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class Tab2PageRoutingModule {}
+export class MeetPageRoutingModule {}

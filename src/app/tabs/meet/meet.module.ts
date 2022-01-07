@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MeetPage } from './meet.page';
 
-import { Tab2PageRoutingModule } from './meet-routing.module';
+import { MeetPageRoutingModule } from './meet-routing.module';
 
 
 
@@ -21,7 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule,
+    MeetPageRoutingModule,
     SharedModule                     //Import shared module
   ],
   declarations: [
