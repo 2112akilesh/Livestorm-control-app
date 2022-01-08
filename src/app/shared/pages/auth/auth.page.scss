@@ -2,8 +2,12 @@ ion-content {
   --padding-top: 40%;
   --padding-start: 10%;
   --padding-end: 10%;
-  --ion-background-color: url(../../../../assets/authPageBackground/walk.gif) 50% / cover no-repeat;
+  --background: var(--ion-color-livestorm-light-bg);
   --ion-item-background: rbga(0, 0, 0, 0.5);
+}
+
+ion-button {
+  --box-shadow: none;
 }
 
 .input-group {
@@ -20,4 +24,44 @@ ion-content {
   padding-left: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.qr-button {
+  height: 150px;
+  width: 150px;
+}
+ion-icon {
+  font-size: 70px;
+}
+// Line separation
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strike>span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike>span:before,
+.strike>span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #ccd5e2;
+}
+
+.strike>span:before {
+  right: 100%;
+  margin-right: 10px;
+}
+
+.strike>span:after {
+  left: 100%;
+  margin-left: 10px;
 }

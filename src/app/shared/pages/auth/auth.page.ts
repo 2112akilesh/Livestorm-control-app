@@ -27,7 +27,6 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      organizationId: ['6e1f9bbc-d7f9-49da-8364-45feef4ab8ad', [Validators.required, Validators.minLength(30)]],
       apiToken: ['eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiOTMyMThjZmItYmNlZS00ZjI5LTg3ODktYTc0ZmQwNGI1N2E4IiwiaWF0IjoxNjMyNjM5ODY4LCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.G2faL36iCRFXcvznVZi2K26-HerLsMJ7HnnBAF3Lm_w', [Validators.required, Validators.minLength(40)]]
     });
   }
@@ -45,9 +44,6 @@ export class AuthPage implements OnInit {
 
   }
 
-  get organizationId() {
-    return this.credentials.get('organizationId');
-  }
   get apiToken() {
     return this.credentials.get('apiToken');
   }
@@ -56,8 +52,6 @@ export class AuthPage implements OnInit {
   async openauthorization(){
     await Browser.open({ url: 'https://developers.livestorm.co/docs/authorization' });
   }
-  async openGetOrganization(){
-    await Browser.open({ url: 'https://developers.livestorm.co/reference/get_organization' });
-  }
+
 
 }

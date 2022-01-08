@@ -63,7 +63,7 @@ ion-buttons > ion-button {
   height: 200vh;
   width: 100%;
   position: absolute;
-  background: rgba(231, 240, 255, 1);
+  background: var(--ion-color-livestorm-light-bg);
   z-index: -1;
 }
 
