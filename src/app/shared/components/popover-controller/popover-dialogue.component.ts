@@ -6,7 +6,7 @@ import {PopoverController} from '@ionic/angular';
   selector: 'app-popover-dialogue',
   template: `
     <ion-list>
-      <ion-item [routerLink]="['/tabs/meet/settings']" button (click)="close()">Settings</ion-item>
+      <ion-item [routerLink]="['/tabs/settings']" button (click)="close()">Settings</ion-item>
       <ion-item  lines="none" detail="false" button (click)="goGit(); close()">GitHub Repo</ion-item>
     </ion-list>
   `

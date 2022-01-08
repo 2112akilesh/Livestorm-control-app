@@ -11,7 +11,7 @@ import {PopoverControllerComponent} from './components/popover-controller/popove
 import {PopoverDialogueComponent} from './components/popover-controller/popover-dialogue.component';
 
 //Importing pages
-import { SettingsPageModule } from './pages/settings/settings.page.module';
+import { SettingsPageModule } from './pages/settings/settings.module';
 
 @NgModule({
     declarations: [

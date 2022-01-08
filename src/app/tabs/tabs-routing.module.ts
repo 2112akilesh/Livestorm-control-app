@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('./meet/meet.module').then(m => m.MeetPageModule)
       },
       {
+        path: 'settings',
+        loadChildren: () => import('../shared/pages/settings/settings.module').then(m => m.SettingsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/chat',
         pathMatch: 'full'

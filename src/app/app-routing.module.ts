@@ -21,10 +21,6 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canLoad: [AuthGuard] // Secure all child pages
   },
-  // {
-  //   path: 'setting',
-  //   loadChildren: () => import('./shared/popover-controller/popover-routing.module').then(m => m.PopoverRoutingModule),
-  // },
   {
     path: '',
     redirectTo: '/auth',

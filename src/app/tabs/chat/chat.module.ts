@@ -17,12 +17,16 @@ import { Camera } from '@ionic-native/camera/ngx';
 
 import { FileSenderComponent } from '../../shared/components/file-sender/file-sender.component';
 
+// Importing shared module
+import { SharedModule } from 'src/app/shared/shared.module';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ChatPageRoutingModule,
+    SharedModule
   ],
   declarations: [
     ChatPage,
