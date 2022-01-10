@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<ion-header class="ion-no-border" [translucent]="true" [hidden]="scanActive">
   <ion-toolbar color="livestorm-light-bg">
 
     <ion-buttons slot="start">
@@ -59,24 +59,33 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" scrollY="false">
-  <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="6">
-          <ion-button class="qr-button" fill="outline" color="livestorm-prime" >
-            <ion-icon name="qr-code-outline"></ion-icon>
-          </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content fullscreen="true" [style.--background]="scanActive?'#00000000':'#e7f0ff'">
+
+  <ion-row class="ion-justify-content-center" [hidden]="scanActive">
+    <ion-col size="6">
+      <ion-button (click)="startScan()" class="qr-button" fill="outline" color="livestorm-prime">
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <p class="ion-text-center" *ngIf="result && !scanActive">{{ result }}</p>
+
+
+  <ion-button class="scan-button" (click)="stopScan()" color="danger" [hidden]="!scanActive">
+    Stop
+  </ion-button>
+  <div class="scan-box" [hidden]="!scanActive"></div>
+
+
   <br>
   <br>
-  <div class="strike">
+  <div class="strike" [hidden]="scanActive">
     <span>or</span>
   </div>
   <br>
 
-  <form (ngSubmit)="login()" [formGroup]="credentials">
+  <form (ngSubmit)="login()" [formGroup]="credentials" [hidden]="scanActive">
     <div class="input-group">
 
       <ion-item>
@@ -85,18 +94,34 @@
 
       <div *ngIf="(apiToken.dirty || apiToken.touched) && apiToken.errors" class="errors">
         <span *ngIf="apiToken.errors?.required">API Token is required</span>
-        <span *ngIf="apiToken.errors?.apiToken">API Token is invalid</span>
+        <!-- <span *ngIf="apiToken.errors?.minlength">API Token is invalid</span> -->
       </div>
 
     </div>
 
     <ion-button fill="solid" color="livestorm-prime" type="submit" expand="block" [disabled]="!credentials.valid">
-      Let's go
+      LET'S GO
     </ion-button>
     <ion-button type="button" (click)="openauthorization()" expand="block" fill="clear">
-      How to obtain a Livestorm API token
+      OBTAIN LIVESTORM API TOKEN
     </ion-button>
   </form>
 
 
 </ion-content>
+
+
+<!-- <ion-content
+  [fullscreen]="true"
+  [style.--background]="scanActive?'#00000000':'#ffffff'"
+>
+  <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
+    SCAN
+  </ion-button>
+  <ion-row class="scan-button" [hidden]="!scanActive">
+    <ion-col class="ion-no-padding">
+      <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
+    </ion-col>
+  </ion-row>
+  <div class="scan-box" [hidden]="!scanActive"></div>
+</ion-content> -->

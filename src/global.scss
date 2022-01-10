@@ -60,13 +60,14 @@
 /* Livestorm Typography */
 :root {
   // // Set the background of the entire app
-  // --ion-background-color: #000;
+  // --ion-background-color: #000;  --ion-background-color: var(--ion-color-livestorm-light-bg);
+
 
   // // Set the default text color
   // --ion-text-color: #fff;
   
   // Set the font family of the entire app
-  --ion-font-family: Inter;
+  --ion-font-family: SanRegular;
 }
 
 h1,
