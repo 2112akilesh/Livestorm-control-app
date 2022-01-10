@@ -61,6 +61,8 @@
 
 <ion-content fullscreen="true" [style.--background]="scanActive?'#00000000':'#e7f0ff'">
 
+
+
   <ion-row class="ion-justify-content-center" [hidden]="scanActive">
     <ion-col size="6">
       <ion-button (click)="startScan()" class="qr-button" fill="outline" color="livestorm-prime">
@@ -69,14 +71,17 @@
     </ion-col>
   </ion-row>
 
-  <p class="ion-text-center" *ngIf="result && !scanActive">{{ result }}</p>
-
-
-  <ion-button class="scan-button" (click)="stopScan()" color="danger" [hidden]="!scanActive">
-    Stop
-  </ion-button>
   <div class="scan-box" [hidden]="!scanActive"></div>
 
+  <ion-row class="qr-cancel" [hidden]="!scanActive">
+    <ion-col class="ion-no-padding">
+      <ion-button  expand="full" color="tertiary" (click)="stopScan()">
+        Cancel
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <p class="ion-text-center" *ngIf="result && scanActive">{{ result }}</p>
 
   <br>
   <br>

@@ -11,6 +11,13 @@
   width: 250px;
 }
 
+.qr-cancel {
+  position: fixed;
+  bottom: 3rem;
+  height: 50px;
+  left: 19vw;
+  right: 19vw;
+}
 
 //--------------------------------------------
 ion-content {
@@ -30,10 +37,11 @@ ion-button {
   height: 10rem;
   width: 10rem;
 }
+
 ion-icon {
   font-size: 70px;
 }
-  
+
 .input-group {
   background: #fff;
   border-radius: 6px;

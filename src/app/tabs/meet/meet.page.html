@@ -3,32 +3,21 @@
     <ion-title>
       Profile
     </ion-title>
-     <ion-buttons slot="end">
+    <ion-buttons slot="end">
       <app-popover-controller></app-popover-controller>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <ion-list>
     <ion-item>
-      <ion-label color="primary" fixed>Org ID:</ion-label>
-      <ion-input [disabled]="toggleTextBox" color="dark" [(ngModel)]="OrdId" value="{{token}}"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label color="primary" fixed>API Tok:</ion-label>
-      <ion-input [disabled]="toggleTextBox" color="dark" [(ngModel)]="ApiToken" value="{{apiToken}}">
+      <ion-input color="dark" [(ngModel)]="apiToken" value="{{apiToken}}">
       </ion-input>
     </ion-item>
 
-    <ion-button class="edit-button" *ngIf="!toggleTextBox" fill="clear" (click)="disableEdit()">
-      <ion-icon name="close-circle-outline"></ion-icon>
-    </ion-button>
-    <ion-button class="edit-button" color="primary" (click)="enableEdit()">
-      <ion-icon *ngIf="toggleTextBox" name="create-outline"></ion-icon>
-      <ion-icon *ngIf="!toggleTextBox"  name="checkmark-outline"></ion-icon>
-    </ion-button>
   </ion-list>
 
   <!-- Mic toggle button -->
@@ -43,16 +32,16 @@
     <ion-icon *ngIf="!toggleCamButton" name="mic-off-outline"></ion-icon>
   </ion-button> -->
 
-  <ion-button class="game-controller" (click)="openSelect()">
+  <!-- <ion-button class="game-controller" (click)="openSelect()">
     <ion-icon name="game-controller"></ion-icon>
   </ion-button>
   <ion-select [(ngModel)]="choices" (ionChange)="startGame(choices)" [hidden]='showList' #gameList>
     <ion-select-option value="game-1">Checkers</ion-select-option>
     <ion-select-option value="game-2">Chess</ion-select-option>
-  </ion-select>
+  </ion-select> -->
 
 </ion-content>
 
 <ion-footer class="ion-no-border" no-shadow>
-  <ion-button expand="block" size="large" (click)="logout()">Logout</ion-button>
+
 </ion-footer>

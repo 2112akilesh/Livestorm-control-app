@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
@@ -49,4 +48,5 @@ export class AuthenticationService {
     this.isAuthenticated.next(false);
     return Storage.remove({ key: API_TOKEN });
   }
+
 }

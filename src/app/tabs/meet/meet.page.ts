@@ -28,34 +28,16 @@ export class MeetPage {
   public toggleMicButton = true;
   public toggleCamButton = true;
   storageName = '';
-  asdf: Promise<any>;
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    public gamesService: GamesService,
-  ) {
+  constructor(public gamesService: GamesService) {
     this.loadToken();
   }
 
 
   async loadToken() {
-    const token = await Storage.get({ key: TOKEN_KEY });
     const apiToken = await Storage.get({ key: API_TOKEN });
-    if (token && token.value && apiToken && apiToken.value) {
-      console.log('set token: ', token.value);
-      this.token = token.value;
+    if (apiToken && apiToken.value) {
       this.apiToken = apiToken.value;
     }
-  }
-
-  //Toggling the buttons functions
-
-  async enableEdit(ordId: any, apiToken: any) {
-    this.toggleTextBox = !this.toggleTextBox;
-  }
-
-  disableEdit(active: boolean) {
-    this.toggleTextBox = !this.toggleTextBox;
   }
 
   //const MyToken = Storage.get({ key: 'my-token' });
@@ -67,11 +49,6 @@ export class MeetPage {
   //   this.toggleCamButton = !this.toggleCamButton;
   // }
 
-  //---------------Logout section-----------------
-  async logout() {
-    await this.authenticationService.logout();
-    this.router.navigateByUrl('/', { replaceUrl: true });
-  }
 
   //---------------Gaming section-----------------
   openSelect() {                   //Function to show the game selection menu
