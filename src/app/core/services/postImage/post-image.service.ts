@@ -9,7 +9,7 @@ import { Platform } from '@ionic/angular';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class PostImageService {
 
 
   capturedBase64String = '';

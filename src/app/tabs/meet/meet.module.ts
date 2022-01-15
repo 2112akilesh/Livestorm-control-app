@@ -22,7 +22,7 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     FormsModule,
     MeetPageRoutingModule,
-    SharedModule                     //Import shared module
+    SharedModule                     //Importing shared module
   ],
   declarations: [
     MeetPage

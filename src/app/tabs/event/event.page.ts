@@ -12,16 +12,19 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 
 //importing chat services
 import { PubsubService } from '../../core/services/post/pubsub.service';
-import { ApiService } from '../../core/services/postImage/post-image.service';
+import { PostImageService } from '../../core/services/postImage/post-image.service';
 
-
+import chatData from './chats.json';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'chat.page.html',
-  styleUrls: ['chat.page.scss']
+  selector: 'app-event',
+  templateUrl: 'event.page.html',
+  styleUrls: ['event.page.scss']
 })
-export class ChatPage {
+export class EventPage {
+
+  chats = chatData;
+
 
   images = [];
 
@@ -30,7 +33,7 @@ export class ChatPage {
 
   constructor(
     public pubsubService: PubsubService,
-    public apiService: ApiService,
+    public postImageService: PostImageService,
     public actionSheetController: ActionSheetController,
     private filePath: FilePath,
     private fileChooser: FileChooser
@@ -40,25 +43,20 @@ export class ChatPage {
 
 
   //----------------Services function------------------------
-  uploadMessage(chatMessage) {
-    const chat = chatMessage;
-    this.pubsubService.sendMessage(chat);
-    this.chatMessage = '';
-  }
-
   uploadImage(gallary, camera) {
     console.log(gallary, camera);
     if (gallary === null) {
-      this.pubsubService.sendImages(this.apiService.capturedBase64String);
-      console.log(this.apiService.capturedBase64String);
+      this.pubsubService.sendImages(this.postImageService.capturedBase64String);
+      console.log(this.postImageService.capturedBase64String);
     } else {
       this.pubsubService.sendImages(this.base64String);
     }
   }
 
+
   //----------------capasitor/cordova function-----------------
   takeFromCamera() {
-    this.apiService.getFromCamera();
+    this.postImageService.getFromCamera();
     //console.log (this.apiService.capturedBase64String);
   }
 

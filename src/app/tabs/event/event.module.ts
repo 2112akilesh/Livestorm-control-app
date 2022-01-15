@@ -2,20 +2,19 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChatPage } from './chat.page';
+import { EventPage } from './event.page';
 
-import { ChatPageRoutingModule } from './chat-routing.module';
+import { EventPageRoutingModule } from './event-routing.module';
 
 //declaring services
 import { PubsubService } from '../../core/services/post/pubsub.service';
-import { ApiService } from '../../core/services/postImage/post-image.service';
+import { PostImageService } from '../../core/services/postImage/post-image.service';
 
 
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
-import { FileSenderComponent } from '../../shared/components/file-sender/file-sender.component';
 
 // Importing shared module
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -25,19 +24,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ChatPageRoutingModule,
-    SharedModule
+    EventPageRoutingModule,
+    SharedModule                      //Importing shared module
   ],
   declarations: [
-    ChatPage,
-    FileSenderComponent
+    EventPage
   ],
   providers: [
     PubsubService,
-    ApiService,
+    PostImageService,
     FilePath,
     FileChooser,
     Camera
   ]
 })
-export class ChatPageModule { }
+export class EventPageModule { }

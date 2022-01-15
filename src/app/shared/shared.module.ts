@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 //Importing routing module
 import { RouterModule } from '@angular/router';
@@ -13,6 +14,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 
 //Importing pages
 import { SettingsPageModule } from './pages/settings/settings.module';
+import { ChatPageModule } from './pages/chat/chat.module';
+
 
 @NgModule({
   declarations: [
@@ -23,13 +26,15 @@ import { SettingsPageModule } from './pages/settings/settings.module';
   imports: [
     IonicModule,
     CommonModule,
+    FormsModule,
     RouterModule,          //Routing module
-    SettingsPageModule
+    SettingsPageModule,
+    ChatPageModule
   ],
   exports: [
     PopoverControllerComponent,
     PopoverDialogueComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   providers: [LogoutComponent],
 })

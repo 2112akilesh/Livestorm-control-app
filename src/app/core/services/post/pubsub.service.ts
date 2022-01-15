@@ -24,7 +24,7 @@ export class PubsubService {
   }
   //Send messages
   sendMessage(postChat) {
-console.log(postChat);
+    console.log(postChat);
 
     //Body
     const body = {

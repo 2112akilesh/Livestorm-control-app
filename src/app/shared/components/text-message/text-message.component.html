@@ -1,0 +1,6 @@
+<ion-item lines="none">
+  <ion-input type="text" (keyup.enter)="uploadMessage(chatMessage)" placeholder="Message" [(ngModel)]="chatMessage"></ion-input>
+  <ion-button clear color="primary" (click)="uploadMessage(chatMessage) " [disabled]="chatMessage === ''">
+    Send
+  </ion-button>
+</ion-item>

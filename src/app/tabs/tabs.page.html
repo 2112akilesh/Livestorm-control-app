@@ -1,15 +1,15 @@
-<ion-tabs (ionTabsDidChange)="setSelectedTab()">
+ <ion-tabs (ionTabsDidChange)="setSelectedTab()">
 
   <ion-tab-bar slot="bottom" [hidden]="onTab">
-    <ion-tab-button tab="chat">
-      <ion-icon name="chatbox-sharp"></ion-icon>
-      <ion-label>Chat</ion-label>
+    <ion-tab-button tab="event">
+      <ion-icon [name]="selected === 'event' ? 'chatbox' : 'chatbox-outline'"></ion-icon>
+      <ion-label>Event</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="meet">
-      <ion-icon name="create"></ion-icon>
+      <ion-icon [name]="selected === 'meet' ? 'create' : 'create-outline'" name="create"></ion-icon>
       <ion-label>Meet</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 
-</ion-tabs>
+</ion-tabs> 

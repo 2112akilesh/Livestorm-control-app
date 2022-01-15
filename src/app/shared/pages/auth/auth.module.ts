@@ -10,7 +10,7 @@ import { AuthPage } from './auth.page';
 
 //import { RiveModule } from 'ng-rive';
 //Importing modules from tab 1 & 2
-import { ChatPageRoutingModule } from 'src/app/tabs/chat/chat-routing.module';
+import { EventPageRoutingModule } from 'src/app/tabs/event/event-routing.module';
 import { MeetPageRoutingModule } from 'src/app/tabs/meet/meet-routing.module';
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { MeetPageRoutingModule } from 'src/app/tabs/meet/meet-routing.module';
     ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
-    ChatPageRoutingModule,
+    EventPageRoutingModule,
     MeetPageRoutingModule
   ],
   declarations: [AuthPage],

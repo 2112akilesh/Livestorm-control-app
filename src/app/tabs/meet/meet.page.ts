@@ -13,7 +13,7 @@ const TOKEN_KEY = 'my-token';
 const API_TOKEN = 'my-api-token';
 
 @Component({
-  selector: 'app-tab2',
+  selector: 'app-meet',
   templateUrl: 'meet.page.html',
   styleUrls: ['meet.page.scss']
 })

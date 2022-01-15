@@ -7,13 +7,17 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { SharedModule } from '../shared/shared.module';
+
+import { SwiperModule } from 'swiper/angular';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    SwiperModule
   ],
   declarations: [TabsPage]
 })

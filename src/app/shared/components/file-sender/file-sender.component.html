@@ -1,4 +1,4 @@
-<ion-img *ngIf="base64String" [src]="base64String" alt="beautiful"></ion-img>
+<!-- <ion-img *ngIf="base64String" [src]="base64String" alt="beautiful"></ion-img>
 <ion-img *ngIf="apiService.capturedBase64String" [src]="apiService.base64String" alt="beautiful"></ion-img>
 
 <ion-button *ngIf="base64String || apiService.capturedBase64String" color="primary"
@@ -8,4 +8,29 @@
 
 <ion-button *ngIf="base64String || apiService.capturedBase64String" fill="clear" (click)="deleteImage(img, pos)">
   <ion-icon slot="icon-only" name="trash"></ion-icon>
-</ion-button>
+</ion-button> -->
+<h3 *ngIf="images.length === 0" class="ion-padding ion-text-center">Please Select Image!</h3>
+
+<ion-list>
+  <ion-item *ngFor="let file of images; let i = index">
+    <ion-thumbnail slot="start">
+      <ion-img [src]="file.data"></ion-img>
+    </ion-thumbnail>
+    <ion-label class="ion-text-wrap">
+      {{ file.name }}
+    </ion-label>
+    <ion-button slot="end" fill="clear" (click)="startUpload(file)">
+      <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
+
+<ion-toolbar color="primary">
+  <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Select Image
+  </ion-button>
+</ion-toolbar>
