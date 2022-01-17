@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MeetPage } from './meet.page';
+import { EventsPage } from './events.page';
 
-import { MeetPageRoutingModule } from './meet-routing.module';
+import { EventsPageRoutingModule } from './events-routing.module';
 
 
 
@@ -21,12 +21,12 @@ import { SharedModule } from '../../shared/shared.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    MeetPageRoutingModule,
+    EventsPageRoutingModule,
     SharedModule                     //Importing shared module
   ],
   declarations: [
-    MeetPage
+    EventsPage
   ],
   providers: [AuthenticationService],
 })
-export class MeetPageModule {}
+export class EventsPageModule {}

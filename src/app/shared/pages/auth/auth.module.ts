@@ -10,8 +10,9 @@ import { AuthPage } from './auth.page';
 
 //import { RiveModule } from 'ng-rive';
 //Importing modules from tab 1 & 2
-import { EventPageRoutingModule } from 'src/app/tabs/event/event-routing.module';
-import { MeetPageRoutingModule } from 'src/app/tabs/meet/meet-routing.module';
+import { SessionsPageRoutingModule } from 'src/app/tabs/sessions/sessions-routing.module';
+import { EventsPageRoutingModule } from 'src/app/tabs/events/events-routing.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,8 +20,8 @@ import { MeetPageRoutingModule } from 'src/app/tabs/meet/meet-routing.module';
     ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
-    EventPageRoutingModule,
-    MeetPageRoutingModule
+    SessionsPageRoutingModule,
+    EventsPageRoutingModule
   ],
   declarations: [AuthPage],
 })

@@ -1,15 +1,15 @@
 <ion-header mode="ios" [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Events
+      Sessions
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="ios" fullscreen="true">
+<ion-content fullscreen="true">
   <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Events</ion-title>
+      <ion-title size="large">Sessions</ion-title>
     </ion-toolbar>
     <ion-toolbar>
       <div class="search">
@@ -19,9 +19,6 @@
       </div>
     </ion-toolbar>
   </ion-header>
-
-
-
 
   <ion-list>
     <ion-item *ngFor="let chat of chats" button detail="false" routerLink="chat">
@@ -50,12 +47,12 @@
       <ion-row>
         <ion-img *ngIf="base64String" [src]="base64String" alt="beautiful"></ion-img>
         <ion-img *ngIf="apiService.capturedBase64String" [src]="apiService.base64String" alt="beautiful"></ion-img>
-        
+
         <ion-button *ngIf="base64String || apiService.capturedBase64String" color="primary"
         (click)="uploadImage(base64String, apiService.capturedBase64String) ">
         <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
       </ion-button>
-      
+
       <ion-button *ngIf="base64String || apiService.capturedBase64String" fill="clear"
       (click)="deleteImage(img, pos)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>

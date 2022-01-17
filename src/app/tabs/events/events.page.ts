@@ -14,10 +14,10 @@ const API_TOKEN = 'my-api-token';
 
 @Component({
   selector: 'app-meet',
-  templateUrl: 'meet.page.html',
-  styleUrls: ['meet.page.scss']
+  templateUrl: 'events.page.html',
+  styleUrls: ['events.page.scss']
 })
-export class MeetPage {
+export class EventsPage {
 
   @ViewChild('gameList') selectRef: IonSelect;
   showList = true;

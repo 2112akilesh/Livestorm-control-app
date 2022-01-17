@@ -17,11 +17,11 @@ import { PostImageService } from '../../core/services/postImage/post-image.servi
 import chatData from './chats.json';
 
 @Component({
-  selector: 'app-event',
-  templateUrl: 'event.page.html',
-  styleUrls: ['event.page.scss']
+  selector: 'app-sessions',
+  templateUrl: 'sessions.page.html',
+  styleUrls: ['sessions.page.scss']
 })
-export class EventPage {
+export class SessionsPage {
 
   chats = chatData;
 

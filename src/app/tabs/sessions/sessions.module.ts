@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EventPage } from './event.page';
+import { SessionsPage } from './sessions.page';
 
-import { EventPageRoutingModule } from './event-routing.module';
+import { SessionsPageRoutingModule } from './sessions-routing.module';
 
 //declaring services
 import { PubsubService } from '../../core/services/post/pubsub.service';
@@ -24,11 +24,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    EventPageRoutingModule,
+    SessionsPageRoutingModule,
     SharedModule                      //Importing shared module
   ],
   declarations: [
-    EventPage
+    SessionsPage
   ],
   providers: [
     PubsubService,
@@ -38,4 +38,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
     Camera
   ]
 })
-export class EventPageModule { }
+export class SessionsPageModule { }

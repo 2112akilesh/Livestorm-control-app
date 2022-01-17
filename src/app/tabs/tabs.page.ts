@@ -11,7 +11,7 @@ import SwiperCore from 'swiper';
 export class TabsPage implements OnInit{
 
   @ViewChild(IonTabs) tabs: IonTabs;
-  selected = 'event';
+  selected = 'events';
   onTab = false;
 
   constructor() {}
@@ -25,7 +25,7 @@ export class TabsPage implements OnInit{
       this.selected = this.tabs.getSelected();
       //console.log('selected now: ', this.selected);
       this.onTab = this.selected === 'settings';
-      //this.onTab = this.selected === 'event';
+      //this.onTab = this.selected === 'sessions';
     });
   }
 }

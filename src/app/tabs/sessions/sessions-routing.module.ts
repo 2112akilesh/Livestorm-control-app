@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatPage } from 'src/app/shared/pages/chat/chat.page';
 
-import { EventPage } from './event.page';
+import { SessionsPage } from './sessions.page';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: EventPage,
+    component: SessionsPage,
   },{
     path: 'chat',
     loadChildren: () => import('src/app/shared/pages/chat/chat.module').then(m => m.ChatPageModule)
@@ -19,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class EventPageRoutingModule {}
+export class SessionsPageRoutingModule {}
