@@ -19,7 +19,7 @@ export class TabsPage implements OnInit{
   ngOnInit() { }
 
   setSelectedTab(){
-    console.log('tab changed!' + this.tabs.getSelected());
+    console.log('tab changed: ' + this.tabs.getSelected());
 
     setTimeout(() => {
       this.selected = this.tabs.getSelected();

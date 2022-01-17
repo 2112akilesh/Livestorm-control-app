@@ -9,6 +9,13 @@ ion-avatar {
   margin-bottom: 10px;
 }
 
+.searchbar-md.has-content .searchbar-search-icon {
+  display: none !important;
+}
+.searchbar-md.has-content .searchbar-md-cancel {
+  display: block !important;
+}
+
 .search {
   margin-left: 10px;
   margin-right: 10px;

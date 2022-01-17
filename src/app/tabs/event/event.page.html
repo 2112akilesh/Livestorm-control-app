@@ -1,21 +1,13 @@
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header mode="ios" [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="primary"> Edit </ion-button>
-    </ion-buttons>
     <ion-title>
       Events
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="primary" (click)="startChat()">
-        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content mode="ios" fullscreen="true">
+  <ion-header mode="ios" collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Events</ion-title>
     </ion-toolbar>
