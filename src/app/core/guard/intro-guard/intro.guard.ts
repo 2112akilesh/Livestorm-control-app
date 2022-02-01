@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router , UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanLoad, Router } from '@angular/router';
 
 import { Storage } from '@capacitor/storage';
 
@@ -16,6 +15,7 @@ export class IntroGuard implements CanLoad {
 
   async canLoad(): Promise<boolean> {
     const hasSeenIntro = await Storage.get({key: INTRO_KEY});
+    // Change it to false to view the intro on startup every time when rhw app-opens
     if (hasSeenIntro && (hasSeenIntro.value === 'true')) {
       return true;
     } else {

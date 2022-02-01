@@ -1,0 +1,10 @@
+  <ion-item lines="none">
+    <ion-buttons>
+      <ion-button>
+        <ion-icon name="moon" *ngIf="!darkMode" slot="icon-only"></ion-icon>
+        <ion-icon name="sunny" *ngIf="darkMode" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-label>Dark Mode</ion-label>
+    <ion-toggle name="darkMode" (ionChange)="changeDarkmode()" slot="end"></ion-toggle>
+  </ion-item>

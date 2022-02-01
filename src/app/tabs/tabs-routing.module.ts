@@ -8,23 +8,27 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'SendData',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'sessions',
+        loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsPageModule)
       },
       {
-        path: 'Profile',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'events',
+        loadChildren: () => import('./events/events.module').then(m => m.EventsPageModule)
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('../shared/pages/settings/settings.module').then(m => m.SettingsPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/SendData',
+        redirectTo: '/tabs/sessions',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/SendData',
+    redirectTo: '/tabs/sessions',
     pathMatch: 'full'
   }
 ];

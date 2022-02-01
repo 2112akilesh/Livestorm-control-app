@@ -9,12 +9,12 @@ import { IntroGuard } from './core/guard/intro-guard/intro.guard';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./shared/auth/auth.module').then( m => m.AuthPageModule),
+    loadChildren: () => import('./shared/pages/auth/auth.module').then(m => m.AuthPageModule),
     canLoad: [IntroGuard, AutoLoginGuard]   // Check if we should show the introduction or forward to inside
   },
   {
     path: 'intro',
-    loadChildren: () => import('./shared/intro/intro.module').then( m => m.IntroPageModule)
+    loadChildren: () => import('./shared/pages/intro/intro.module').then(m => m.IntroPageModule)
   },
   {
     path: 'tabs',
@@ -26,7 +26,6 @@ const routes: Routes = [
     redirectTo: '/auth',
     pathMatch: 'full'
   }
-
 ];
 @NgModule({
   imports: [

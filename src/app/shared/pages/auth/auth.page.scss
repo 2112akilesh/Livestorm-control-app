@@ -1,0 +1,94 @@
+.scan-box {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 100vmax rgb(0, 0, 0, 0.5);
+  content: "";
+  display: block;
+  left: 50%;
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  height: 250px;
+  width: 250px;
+}
+
+.qr-cancel {
+  position: fixed;
+  bottom: 3rem;
+  height: 50px;
+  left: 19vw;
+  right: 19vw;
+}
+
+//--------------------------------------------
+ion-content {
+  --padding-top: 15%;
+  --padding-start: 10%;
+  --padding-end: 10%;
+  //--background: var(--ion-color-livestorm-light-bg);
+  //background: 'transparent';
+}
+
+ion-button {
+  --box-shadow: none;
+  font-family: InterSemiBold;
+}
+
+.qr-button {
+  height: 10rem;
+  width: 10rem;
+}
+
+ion-icon {
+  font-size: 70px;
+}
+
+.input-group {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+}
+
+.errors {
+  font-size: small;
+  color: var(--ion-color-livestorm-dark-prime);
+  background: #EFBC9B;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+// Line separation
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strike>span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike>span:before,
+.strike>span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #ccd5e2;
+}
+
+.strike>span:before {
+  right: 100%;
+  margin-right: 10px;
+}
+
+.strike>span:after {
+  left: 100%;
+  margin-left: 10px;
+}

@@ -1,0 +1,47 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      Meeting
+    </ion-title>
+    <ion-buttons slot="end">
+      <app-popover-controller></app-popover-controller>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" fixed>API Tok:</ion-label>
+      <ion-input color="dark" [(ngModel)]="apiToken" value="{{apiToken}}">
+      </ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Mic toggle button -->
+  <!-- <ion-button class="edit-button" color="primary" (click)="enableMic()">
+    <ion-icon *ngIf="toggleMicButton" name="videocam-outline"></ion-icon>
+    <ion-icon *ngIf="!toggleMicButton" name="videocam-off-outline"></ion-icon>
+  </ion-button> -->
+
+  <!-- Camera toggle button -->
+  <!-- <ion-button class="edit-button" color="primary" (click)="enableCam()">
+    <ion-icon *ngIf="toggleCamButton" name="mic-outline"></ion-icon>
+    <ion-icon *ngIf="!toggleCamButton" name="mic-off-outline"></ion-icon>
+  </ion-button> -->
+
+  <!-- <ion-button class="game-controller" (click)="openSelect()">
+    <ion-icon name="game-controller"></ion-icon>
+  </ion-button>
+  <ion-select [(ngModel)]="choices" (ionChange)="startGame(choices)" [hidden]='showList' #gameList>
+    <ion-select-option value="game-1">Checkers</ion-select-option>
+    <ion-select-option value="game-2">Chess</ion-select-option>
+  </ion-select> -->
+
+</ion-content>
+
+<ion-footer class="ion-no-border" no-shadow>
+
+</ion-footer>

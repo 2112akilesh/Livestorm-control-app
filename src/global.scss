@@ -24,3 +24,106 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* Importing swiper css bundle */
+@import 'swiper/css/bundle';
+
+
+
+/* Importing custom fonts */
+@font-face {
+  font-family: InterRegular;
+  src: url("./assets/fonts/Inter/Inter-Regular.woff2");
+}
+@font-face {
+  font-family: InterBlack;
+  src: url("./assets/fonts/Inter/Inter-Black.woff2");
+}
+@font-face {
+  font-family: InterSemiBold;
+  src: url("./assets/fonts/Inter/Inter-SemiBold.woff2");
+}
+
+@font-face {
+  font-family: SanRegular;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: SanSemiBold;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-SemiBold.ttf");
+}
+@font-face {
+  font-family: SanLight;
+  src: url("./assets/fonts/ObjectSans/SourceSansPro-Light.ttf");
+}
+
+
+
+/* Livestorm Typography */
+:root {
+  // // Set the background of the entire app
+  // --ion-background-color: #000;  --ion-background-color: var(--ion-color-livestorm-light-bg);
+
+
+  // // Set the default text color
+  // --ion-text-color: #fff;
+  
+  // Set the font family of the entire app
+  --ion-font-family: SanRegular;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 32px;
+  font-weight: 500;
+  font-family: InterSemiBold;
+  line-height: 40px;
+}
+
+
+/* Livestorm custom colours */
+.ion-color-livestorm-dark-prime {
+  --ion-color-base: var(--ion-color-livestorm-dark-prime);
+  --ion-color-base-rgb: var(--ion-color-livestorm-dark-prime-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-dark-prime-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-dark-prime-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-dark-prime-shade);
+  --ion-color-tint: var(--ion-color-livestorm-dark-prime-tint);
+}
+
+.ion-color-livestorm-prime {
+  --ion-color-base: var(--ion-color-livestorm-prime);
+  --ion-color-base-rgb: var(--ion-color-livestorm-prime-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-prime-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-prime-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-prime-shade);
+  --ion-color-tint: var(--ion-color-livestorm-prime-tint);
+}
+
+.ion-color-livestorm-green {
+  --ion-color-base: var(--ion-color-livestorm-green);
+  --ion-color-base-rgb: var(--ion-color-livestorm-green-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-green-shade);
+  --ion-color-tint: var(--ion-color-livestorm-green-tint);
+}
+
+.ion-color-livestorm-light-blue {
+  --ion-color-base: var(--ion-color-livestorm-light-blue);
+  --ion-color-base-rgb: var(--ion-color-livestorm-light-blue-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-light-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-light-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-light-blue-shade);
+  --ion-color-tint: var(--ion-color-livestorm-light-blue-tint);
+}
+
+.ion-color-livestorm-light-bg {
+  --ion-color-base: var(--ion-color-livestorm-light-bg);
+  --ion-color-base-rgb: var(--ion-color-livestorm-light-bg-rgb);
+  --ion-color-contrast: var(--ion-color-livestorm-light-bg-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-livestorm-light-bg-contrast-rgb);
+  --ion-color-shade: var(--ion-color-livestorm-light-bg-shade);
+  --ion-color-tint: var(--ion-color-livestorm-light-bg-tint);
+}

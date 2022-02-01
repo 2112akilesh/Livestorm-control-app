@@ -1,5 +1,5 @@
 {
-  "name": "controller",
+  "name": "control",
   "integrations": {
     "capacitor": {},
     "cordova": {}
@@ -7,8 +7,8 @@
   "type": "angular",
   "proxies": [
     {
-      "path": "/post",
-      "proxyUrl": "http://localhost:1234"
+      "path": "/chat",
+      "proxyUrl": "http://localhost:8100"
     }
   ]
 }
