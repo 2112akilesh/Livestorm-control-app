@@ -14,6 +14,7 @@ import { AuthenticationService } from '../../core/services/authentication/authen
 
 //Importing shared Module
 import { SharedModule } from '../../shared/shared.module';
+import {CoreModule} from '../../core/core.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     FormsModule,
     EventsPageRoutingModule,
-    SharedModule                     //Importing shared module
+    SharedModule,                     //Importing shared module
+    CoreModule
   ],
   declarations: [
     EventsPage

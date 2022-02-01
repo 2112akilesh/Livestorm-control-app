@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
+import { JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 //Import capasitor plugin
 import { Filesystem } from '@capacitor/filesystem';
@@ -10,34 +12,35 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 //import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 
-//importing chat services
+//importing services
 import { PubsubService } from '../../core/services/post/pubsub.service';
 import { PostImageService } from '../../core/services/postImage/post-image.service';
 
-import chatData from './chats.json';
 
 @Component({
   selector: 'app-sessions',
   templateUrl: 'sessions.page.html',
   styleUrls: ['sessions.page.scss']
 })
-export class SessionsPage {
-
-  chats = chatData;
+export class SessionsPage implements OnInit {
 
 
   images = [];
 
   base64String = '';
   chatMessage = '';
+  noOfSession = 0;
+  count = 1;
+
 
   constructor(
     public pubsubService: PubsubService,
     public postImageService: PostImageService,
     public actionSheetController: ActionSheetController,
-    private filePath: FilePath,
-    private fileChooser: FileChooser
   ) { }
+
+  async ngOnInit() {
+  }
 
   //Button click upload function
 
@@ -60,15 +63,16 @@ export class SessionsPage {
     //console.log (this.apiService.capturedBase64String);
   }
 
-  selectFromGallery() {
-    this.fileChooser.open().then((val) => {
-      this.filePath.resolveNativePath(val).then((path) => {
-        Filesystem.readFile({
-          path,
-        }).then((base64) => {
-          this.base64String = 'data:image/jpeg;base64,' + base64.data;
-        });
-      });
-    });
+  //----------------Test list of sessions------------------------
+
+
+
+  getImage(sessionId) {
+    //this.sessionsService.getSessionsUserIcon(sessionId);
+    this.count = this.count + 1;
+    console.log(this.count);
   }
+
+
+
 }

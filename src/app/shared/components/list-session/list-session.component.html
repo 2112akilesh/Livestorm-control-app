@@ -1,0 +1,12 @@
+<ion-list>
+  <ion-item *ngFor="let list of listOfSession" button detail="false" (click)="navSession(list.id)">
+    <ion-avatar slot="start">
+      <img src="https://avatars.dicebear.com/api/croodles/{{list.id}}.svg">
+    </ion-avatar>
+    <ion-label><b>{{ list.id }}</b>
+      <p>
+        {{ list.attributes.room_link }}
+      </p>
+    </ion-label>
+  </ion-item>
+</ion-list>

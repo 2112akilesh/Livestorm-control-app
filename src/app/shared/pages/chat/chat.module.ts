@@ -25,6 +25,8 @@ import { TextMessageComponent } from '../../components/text-message/text-message
     ChatPage,
     FileSenderComponent,
     TextMessageComponent
+  ],
+  providers:[
   ]
 })
 export class ChatPageModule { }
