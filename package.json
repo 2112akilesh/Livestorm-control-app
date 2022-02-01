@@ -31,6 +31,7 @@
     "@capacitor/keyboard": "1.0.3",
     "@capacitor/status-bar": "^1.0.3",
     "@capacitor/storage": "^1.2.0",
+    "@dicebear/avatars": "^4.10.2",
     "@ionic-native/camera": "^5.36.0",
     "@ionic-native/file": "^5.36.0",
     "@ionic-native/file-chooser": "^5.36.0",

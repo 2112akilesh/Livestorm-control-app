@@ -18,6 +18,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 
 // Importing shared module
 import { SharedModule } from 'src/app/shared/shared.module';
+import {CoreModule} from '../../core/core.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     SessionsPageRoutingModule,
-    SharedModule                      //Importing shared module
+    SharedModule,                      //Importing shared module
+    CoreModule
   ],
   declarations: [
     SessionsPage

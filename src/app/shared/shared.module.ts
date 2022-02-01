@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { PopoverControllerComponent } from './components/popover-controller/popover-controller.component';
 import { PopoverDialogueComponent } from './components/popover-controller/popover-dialogue.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ListSessionComponent } from './components/list-session/list-session.component';
 
 //Importing pages
 import { SettingsPageModule } from './pages/settings/settings.module';
@@ -22,6 +23,7 @@ import { ChatPageModule } from './pages/chat/chat.module';
     PopoverControllerComponent,
     PopoverDialogueComponent,
     LogoutComponent,
+    ListSessionComponent
   ],
   imports: [
     IonicModule,
@@ -35,6 +37,7 @@ import { ChatPageModule } from './pages/chat/chat.module';
     PopoverControllerComponent,
     PopoverDialogueComponent,
     LogoutComponent,
+    ListSessionComponent
   ],
   providers: [LogoutComponent],
 })

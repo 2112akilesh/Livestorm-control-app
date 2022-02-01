@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: SessionsPage,
   },{
-    path: 'chat',
+    path: 'chat/:session-id',
     loadChildren: () => import('src/app/shared/pages/chat/chat.module').then(m => m.ChatPageModule)
   }
 ];
