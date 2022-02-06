@@ -19,7 +19,7 @@ export class LogoutComponent implements OnInit {
 
   async logout() {
     await this.authenticationService.logout();
-    this.router.navigateByUrl('/', { replaceUrl: true });
+    this.router.navigateByUrl('/auth', { replaceUrl: true });
   }
 
 }

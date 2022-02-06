@@ -30,7 +30,8 @@ export class AuthPage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      apiToken: ['eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiOTMyMThjZmItYmNlZS00ZjI5LTg3ODktYTc0ZmQwNGI1N2E4IiwiaWF0IjoxNjMyNjM5ODY4LCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.G2faL36iCRFXcvznVZi2K26-HerLsMJ7HnnBAF3Lm_w', [Validators.required]]
+      apiToken: ['eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiMjQxOGUwMWEtNjJiNi00ZjMxLTkxMDAtNDM0MTUxNzg5ZmM1IiwiaWF0IjoxNjMxNjI3NzQxLCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.P9R_xgv-kG-FwT4h2BtrJCrE-QAtUt-rFOiBwOzBELM',
+      [Validators.required]]
     });
   }
 
@@ -113,13 +114,24 @@ export class AuthPage implements OnInit, AfterViewInit, OnDestroy {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.authenticationService.login(this.credentials.value)
-      .then(() => {
-        this.router.navigateByUrl('/tabs', { replaceUrl: true }).then(() => {
-          loading.dismiss();
-        });
-      });
+    this.authenticationService.login(this.credentials.value).subscribe(
+      async (res) => {
+        if (Object.keys(res).length === 0) {
+          await loading.dismiss();
+          this.router.navigateByUrl('/tabs', { replaceUrl: true });
+        }
+      }, async (err) => {
 
+        await loading.dismiss();
+
+        const alert = await this.alertController.create({
+          header: err.error.errors[0].title,
+          message: err.error.errors[0].detail,
+          buttons: ['OK'],
+        });
+        await alert.present();
+      }
+    );
   }
 
   get apiToken() {

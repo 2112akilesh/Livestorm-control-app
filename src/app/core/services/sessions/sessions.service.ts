@@ -37,10 +37,9 @@ export class SessionsService {
   listSessions(): Observable<any> {
     const url = 'https://api.livestorm.co/v1/sessions';
     return from(this.http.get(url, httpOptions)).pipe(
-      map(data => {
-        //console.log(data);
-        return data;
-      })
+      map(data =>
+         data
+      )
     );
   }
 
