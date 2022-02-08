@@ -17,6 +17,9 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { PubsubService } from '../../core/services/post/pubsub.service';
 import { PostImageService } from '../../core/services/postImage/post-image.service';
 
+//import components
+import { ListSessionComponent } from 'src/app/shared/components/list-session/list-session.component';
+
 
 @Component({
   selector: 'app-sessions',
@@ -26,6 +29,7 @@ import { PostImageService } from '../../core/services/postImage/post-image.servi
 export class SessionsPage implements OnInit {
 
   @ViewChild(IonRefresher) ionRefresher: IonRefresher;
+  @ViewChild(ListSessionComponent) listSessionComponent: ListSessionComponent;
   images = [];
 
   base64String = '';
@@ -76,7 +80,7 @@ export class SessionsPage implements OnInit {
   async doRefresh(event) {
     console.log('Begin async operation');
     this.refresh=true;
-
+    this.listSessionComponent.ngOnInit();
     setTimeout( async () => {
       this.refresh=false;
       console.log('Async operation has ended');
