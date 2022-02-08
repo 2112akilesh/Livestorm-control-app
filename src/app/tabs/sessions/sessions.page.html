@@ -1,13 +1,10 @@
-<ion-header [translucent]="true" mode="ios" class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>
-      Sessions
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content fullscreen="true">
-  
+
+  <ion-refresher mode="md" slot="fixed" pullFactor="0.5" pullMin="60" pullMax="200" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-header collapse="condense" mode="ios">
     <ion-toolbar>
       <ion-title size="large">Sessions</ion-title>
@@ -21,6 +18,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-list-session></app-list-session>
+
+  <app-list-session [loadingSessionStates]="refresh"></app-list-session>
+
 
 </ion-content>

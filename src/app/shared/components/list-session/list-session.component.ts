@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input , OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SessionsService } from '../../../core/services/sessions/sessions.service';
@@ -11,6 +11,7 @@ import { SessionsService } from '../../../core/services/sessions/sessions.servic
 })
 export class ListSessionComponent implements OnInit {
 
+  @Input() loadingSessionStates;
   listOfSession: any;
 
   constructor(

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: SessionsPage,
-  },{
+  }, {
     path: 'chat/:session-id',
     loadChildren: () => import('src/app/shared/pages/chat/chat.module').then(m => m.ChatPageModule)
   }
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SessionsPageRoutingModule {}
+export class SessionsPageRoutingModule { }

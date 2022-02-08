@@ -17,7 +17,7 @@ export class ChatPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tabsPage: TabsPage
-    ) { }
+  ) { }
 
   ngOnInit() {
     const sessionId = this.route.snapshot.paramMap.get('session-id');
@@ -26,10 +26,9 @@ export class ChatPage implements OnInit {
     //console.log(sessionId);
   }
 
-  setSelectedTab(){
+  setSelectedTab() {
     this.tabsPage.setSelectedTab();
   }
-
 
 
 }

@@ -1,12 +1,33 @@
 <ion-list>
-  <ion-item *ngFor="let list of listOfSession" button detail="false" (click)="navSession(list.id)">
-    <ion-avatar slot="start">
-      <img src="https://avatars.dicebear.com/api/croodles/{{list.id}}.svg">
-    </ion-avatar>
-    <ion-label><b>{{ list.id }}</b>
-      <p>
-        {{ list.attributes.room_link }}
-      </p>
-    </ion-label>
-  </ion-item>
+
+  <ng-container *ngIf="(loadingSessionStates)">
+    <ion-item *ngFor="let _ of listOfSession">
+      <ion-avatar slot="start">
+        <ion-skeleton-text style="border-radius: 50%"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h2>
+          <ion-skeleton-text style="width: 50%"></ion-skeleton-text>
+        </h2>
+        <p>
+          <ion-skeleton-text style="width: 80%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ng-container>
+
+  <ion-item-sliding *ngIf="(!loadingSessionStates)">
+    <ion-item *ngFor="let list of listOfSession" button detail="false" (click)="navSession(list.id)">
+      <ion-avatar slot="start">
+        <img src="https://avatars.dicebear.com/api/croodles/{{list.id}}.svg">
+      </ion-avatar>
+      <ion-label><b>{{ list.id }}</b>
+        <p>
+          {{ list.attributes.room_link }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-item-sliding>
+
+
 </ion-list>
