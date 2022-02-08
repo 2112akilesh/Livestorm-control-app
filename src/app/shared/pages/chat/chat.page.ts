@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute ,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {SessionsService} from '../../../core/services/sessions/sessions.service';
+import { SessionsService } from '../../../core/services/sessions/sessions.service';
 
+import { TabsPage } from '../../../tabs/tabs.page';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -12,18 +13,23 @@ export class ChatPage implements OnInit {
 
   data: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      if (params && params.special) {
-        this.data = JSON.parse(params.special);
-      }
-    });
-   }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private tabsPage: TabsPage
+    ) { }
 
   ngOnInit() {
     const sessionId = this.route.snapshot.paramMap.get('session-id');
-    console.log(sessionId);
+
+    this.tabsPage.setSelectedTab();
+    //console.log(sessionId);
   }
+
+  setSelectedTab(){
+    this.tabsPage.setSelectedTab();
+  }
+
 
 
 }

@@ -25,6 +25,7 @@ export class ListSessionComponent implements OnInit {
   }
 
   navSession(sessionId) {
-    this.router.navigate([`tabs/sessions/chat/${sessionId}`]);
+    this.router.navigate(['tabs/sessions/chat/', sessionId]);
+    //this.router.navigate([`tabs/sessions/chat/${sessionId}`]);
   }
 }

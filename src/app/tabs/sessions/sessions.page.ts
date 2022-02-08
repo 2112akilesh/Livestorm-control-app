@@ -66,7 +66,6 @@ export class SessionsPage implements OnInit {
   //----------------Test list of sessions------------------------
 
 
-
   getImage(sessionId) {
     //this.sessionsService.getSessionsUserIcon(sessionId);
     this.count = this.count + 1;

@@ -64,7 +64,6 @@ export class AuthenticationService {
         //   this.isAuthenticated.next(true);
         // })
       );
-        Storage.set({ key: API_TOKEN, value: credentials.apiToken });
   }
 
   logout(): Promise<void> {

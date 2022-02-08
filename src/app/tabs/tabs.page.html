@@ -1,6 +1,6 @@
  <ion-tabs (ionTabsDidChange)="setSelectedTab()">
 
-  <ion-tab-bar slot="bottom" [hidden]="onTab">
+  <ion-tab-bar hide-tabs slot="bottom" [hidden]="onTab || onSettings">
     <ion-tab-button tab="sessions">
       <ion-icon [name]="selected === 'sessions' ? 'chatbox' : 'chatbox-outline'"></ion-icon>
       <ion-label>Session</ion-label>
