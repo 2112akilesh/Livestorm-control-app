@@ -13,7 +13,8 @@ ion-refresher-content {
   margin-right: 10px;
   display: flex;
   align-items: center;
-
+  color: #222428;
+  
   ion-input {
     --padding-start: 10px;
     --background: #E7E6E8;
@@ -22,6 +23,7 @@ ion-refresher-content {
   }
 
   ion-icon {
+    color: #222428;
     margin-left: 10px;
   }
 }

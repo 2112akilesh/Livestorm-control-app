@@ -1,7 +1,3 @@
-ion-content {
-    --background: #F1F2F6;
-}
-
 .transparent {
     --background: transparent;
 }
@@ -17,8 +13,7 @@ ion-icon {
     border-radius: 6px;
 }
 
-ion-list {
-    margin-top: 40px;
-    border-top: .5px solid #CBCACD;
-    border-bottom: .5px solid #CBCACD;
+ion-item {
+    --ion-item-background: var(--ion-color-light);
 }
+

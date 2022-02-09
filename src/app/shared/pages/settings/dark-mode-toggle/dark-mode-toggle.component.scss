@@ -2,3 +2,7 @@ ion-icon {
     padding: 5px;
     border-radius: 6px;
 }
+
+ion-item {
+    --ion-item-background: var(--ion-color-light);
+}

@@ -20,7 +20,7 @@ export class DarkModeToggleComponent implements OnInit {
     prefersDark.addEventListener('change', e => {
       const dark = e.matches ? true : false;
 
-      if (this.darkMode != dark) {
+      if (this.darkMode !== dark) {
         this.darkMode = !this.darkMode;
         this.toggleDarkmode(this.darkMode);
       }

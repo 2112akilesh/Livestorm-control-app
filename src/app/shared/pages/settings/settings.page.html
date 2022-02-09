@@ -15,9 +15,10 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item lines="full">
+  <ion-item class="account" lines="full" [routerLink]="['/tabs/settings/account']" routerDirection="forward">
     <ion-avatar slot="start">
-      <img src="https://cdn.livestorm.co/uploads/identity/avatar/92f7fd85-b79f-4abe-ad4a-77a6d8b47d0e/81a52421-ae71-4e66-a39d-0549301b4cad.JPG">
+      <img
+        src="https://cdn.livestorm.co/uploads/identity/avatar/92f7fd85-b79f-4abe-ad4a-77a6d8b47d0e/81a52421-ae71-4e66-a39d-0549301b4cad.JPG">
     </ion-avatar>
     <ion-label class="ion-text-wrap">
       Akilesh
@@ -25,50 +26,51 @@
     </ion-label>
   </ion-item>
 
-  <ion-list>
-    <ion-item detail>
-      <ion-icon name="star" slot="start" [style.background]="'var(--ion-color-warning)'"></ion-icon>
-      <ion-label>
-        Starred Messages
-      </ion-label>
-    </ion-item>
-      <app-dark-mode-toggle></app-dark-mode-toggle> <!-- Dark mode toggle -->
-  </ion-list>
+  <ion-list lines="none">
+    <ion-item-divider></ion-item-divider>
 
-  <ion-list>
-    <ion-item detail>
+    <ion-item [routerLink]="['/tabs/settings/blocked']">
       <ion-icon name="star" slot="start" [style.background]="'var(--ion-color-primary)'"></ion-icon>
       <ion-label>
-        Account
+        Blocked
       </ion-label>
     </ion-item>
-    <ion-item detail>
-      <ion-icon name="logo-whatsapp" slot="start" [style.background]="'var(--ion-color-success)'"></ion-icon>
-      <ion-label>
-        Chats
-      </ion-label>
-    </ion-item>
-    <ion-item detail>
+    <ion-item [routerLink]="['/tabs/settings/notification']">
       <ion-icon name="scan" slot="start" [style.background]="'var(--ion-color-danger)'"></ion-icon>
       <ion-label>
         Notifications
       </ion-label>
     </ion-item>
-  </ion-list>
 
-  <ion-list>
-    <ion-item detail>
+
+    <ion-item-divider></ion-item-divider>
+
+
+    <ion-item>
+      <ion-icon name="star" slot="start" [style.background]="'var(--ion-color-warning)'"></ion-icon>
+      <ion-label>
+        Starred Messages
+      </ion-label>
+    </ion-item>
+    <app-dark-mode-toggle></app-dark-mode-toggle> <!-- Dark mode toggle -->
+
+    <ion-item-divider></ion-item-divider>
+
+
+    <ion-item>
       <ion-icon name="information" slot="start" [style.background]="'var(--ion-color-primary)'"></ion-icon>
       <ion-label>
         Help
       </ion-label>
     </ion-item>
-    <ion-item detail lines="none">
+    <ion-item>
       <ion-icon name="heart" slot="start" [style.background]="'var(--ion-color-danger)'"></ion-icon>
       <ion-label>
         Tell a Friend
       </ion-label>
     </ion-item>
-  </ion-list>
 
+    <ion-item-divider></ion-item-divider>
+
+  </ion-list>
 </ion-content>
