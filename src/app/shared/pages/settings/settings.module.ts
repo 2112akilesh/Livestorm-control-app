@@ -8,7 +8,7 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
 
 import { SettingsPage } from './settings.page';
 
-import { DarkModeToggleComponent } from './dark-mode-toggle/dark-mode-toggle.component';
+import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 
 @NgModule({
   imports: [
