@@ -14,7 +14,7 @@ import { AuthenticationService } from '../../core/services/authentication/authen
 
 //Importing shared Module
 import { SharedModule } from '../../shared/shared.module';
-import {CoreModule} from '../../core/core.module';
+import { CoreModule } from '../../core/core.module';
 
 
 @NgModule({
@@ -31,4 +31,4 @@ import {CoreModule} from '../../core/core.module';
   ],
   providers: [AuthenticationService],
 })
-export class EventsPageModule {}
+export class EventsPageModule { }

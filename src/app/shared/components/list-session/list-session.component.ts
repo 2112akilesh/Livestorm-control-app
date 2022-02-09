@@ -17,9 +17,10 @@ export class ListSessionComponent implements OnInit {
   constructor(
     public sessionsService: SessionsService,
     private router: Router
-  ) { }
+  ) {  }
 
   async ngOnInit() {
+    await this.sessionsService.loadToken();
     this.sessionsService.listSessions().subscribe((noOfSession) => {
       this.listOfSession = noOfSession.data;
     });

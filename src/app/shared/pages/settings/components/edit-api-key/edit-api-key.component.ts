@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Storage } from '@capacitor/storage';
+import { AlertController } from '@ionic/angular';
+
+import { StorageService } from '../../../../../core/services/storage/storage.service';
 
 const API_TOKEN = 'my-api-token';
 
@@ -11,18 +14,29 @@ const API_TOKEN = 'my-api-token';
 })
 export class EditApiKeyComponent implements OnInit {
 
-  apiToken = '';
+  apiTokenValue = '';
 
-  constructor() { }
+  constructor(
+    private storageService: StorageService,
+    private alertController: AlertController
+    ) { }
 
   ngOnInit() {
     this.loadToken();
   }
 
   async loadToken() {
-    const apiToken = await Storage.get({ key: API_TOKEN });
-    if (apiToken && apiToken.value) {
-      this.apiToken = apiToken.value;
+    //const apiToken = await Storage.get({ key: API_TOKEN });
+    const apiToken = await this.storageService.get(API_TOKEN);
+    if (apiToken) {
+      this.apiTokenValue = apiToken;
+    }else{
+      const alert = await this.alertController.create({
+        header: 'Not Found',
+        message: 'Please verify your API Token.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 

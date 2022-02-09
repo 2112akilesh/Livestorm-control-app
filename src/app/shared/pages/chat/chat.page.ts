@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SessionsService } from '../../../core/services/sessions/sessions.service';
-
 import { TabsPage } from '../../../tabs/tabs.page';
 @Component({
   selector: 'app-chat',
