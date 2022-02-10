@@ -23,14 +23,14 @@ export class PubsubService {
     }
   }
   //Send messages
-  sendMessage(postChat) {
-    console.log(postChat);
+  sendMessage(postChat,orgId) {
+    console.log('service log:',postChat,orgId);
 
     //Body
     const body = {
       scope: {
         type: 'organization',
-        organization_id: `6e1f9bbc-d7f9-49da-8364-45feef4ab8ad`
+        organization_id: orgId
       },
       payload: {
         event: {
@@ -47,7 +47,6 @@ export class PubsubService {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `${this.apiToken}`,
-        mode: 'no-cors'
       },
       url: 'https://plugins.livestorm.co/api/v1/pub_subs',
       data: JSON.stringify(body)

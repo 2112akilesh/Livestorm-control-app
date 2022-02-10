@@ -10,6 +10,7 @@ import { TabsPage } from '../../../tabs/tabs.page';
 export class ChatPage implements OnInit {
 
   data: any;
+  organizationId = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -18,10 +19,10 @@ export class ChatPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const sessionId = this.route.snapshot.paramMap.get('session-id');
+    this.organizationId = this.route.snapshot.paramMap.get('session-id');
 
     this.tabsPage.setSelectedTab();
-    //console.log(sessionId);
+    //console.log(this.organizationId);
   }
 
   setSelectedTab() {

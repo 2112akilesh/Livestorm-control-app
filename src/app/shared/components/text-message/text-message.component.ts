@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 //importing chat services
 import { PubsubService } from 'src/app/core/services/post/pubsub.service';
@@ -10,6 +10,8 @@ import { PubsubService } from 'src/app/core/services/post/pubsub.service';
 })
 export class TextMessageComponent implements OnInit {
 
+  @Input() orgId = '';
+
   chatMessage = '';
 
   constructor(
@@ -17,11 +19,12 @@ export class TextMessageComponent implements OnInit {
   ) { }
 
   uploadMessage(chatMessage) {
+
     const chat = chatMessage;
-    this.pubsubService.sendMessage(chat);
+    this.pubsubService.sendMessage(chat, this.orgId);
     this.chatMessage = '';
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
