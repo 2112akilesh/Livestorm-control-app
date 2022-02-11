@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,6 +17,7 @@ import { GamingModalComponent } from '../../components/gaming-modal/gaming-modal
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     ChatPageRoutingModule
   ],
@@ -26,7 +27,7 @@ import { GamingModalComponent } from '../../components/gaming-modal/gaming-modal
     TextMessageComponent,
     GamingModalComponent
   ],
-  providers:[
+  providers: [
   ]
 })
 export class ChatPageModule { }

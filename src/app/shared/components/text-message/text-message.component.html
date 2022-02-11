@@ -1,6 +1,35 @@
-<ion-item lines="none">
+<!-- <ion-item lines="none">
   <ion-input type="text" (keyup.enter)="uploadMessage(chatMessage)" placeholder="Message" [(ngModel)]="chatMessage"></ion-input>
   <ion-button clear color="primary" (click)="uploadMessage(chatMessage) " [disabled]="chatMessage === ''">
     Send
   </ion-button>
-</ion-item>
+</ion-item> -->
+
+
+<ion-toolbar style="height: auto">
+  <ion-buttons slot="start">
+    <ion-button>
+      <ion-icon slot="icon-only" name="add-circle-outline" color="primary"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-textarea
+    autoGrow
+    rows="1"
+    cols="10"
+    [placeholder]="'message'"
+    [formControl]="messageControl"
+    class="message-textarea"
+  ></ion-textarea>
+  <ion-buttons slot="end">
+    <ion-button>
+      <ion-icon slot="icon-only" name="happy-outline" color="primary"></ion-icon>
+    </ion-button>
+    <ion-button (mousedown)="uploadMessage($event)" *ngIf="messageControl.valid">
+      <ion-icon slot="icon-only" name="send-outline" color="primary"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="!messageControl.valid">
+      <ion-icon slot="icon-only" name="mic-outline" color="primary"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
