@@ -5,12 +5,19 @@ import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { finalize } from 'rxjs/operators';
 
+import { AlertController } from '@ionic/angular';
+
+//impoet service
+import { PostImageService } from 'src/app/core/services/postImage/post-image.service';
+
+
 const IMAGE_DIR = 'stored-images';
 
 interface LocalFile {
   name: string;
   path: string;
   data: string;
+  base64: string;
 }
 @Component({
   selector: 'app-file-sender',
@@ -24,7 +31,9 @@ export class FileSenderComponent implements OnInit {
     private plt: Platform,
     private http: HttpClient,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private postImageService: PostImageService,
+    private alertController: AlertController,
   ) { }
 
   async ngOnInit() {
@@ -60,7 +69,7 @@ export class FileSenderComponent implements OnInit {
   // Get the actual base64 data of an image
   // base on the name of the file
   async loadFileData(fileNames: string[]) {
-    for (let f of fileNames) {
+    for (const f of fileNames) {
       const filePath = `${IMAGE_DIR}/${f}`;
 
       const readFile = await Filesystem.readFile({
@@ -72,6 +81,7 @@ export class FileSenderComponent implements OnInit {
         name: f,
         path: filePath,
         data: `data:image/jpeg;base64,${readFile.data}`,
+        base64: readFile.data
       });
     }
   }
@@ -120,37 +130,75 @@ export class FileSenderComponent implements OnInit {
   // Convert the base64 to blob data
   // and create  formData with it
   async startUpload(file: LocalFile) {
-    const response = await fetch(file.data);
-    const blob = await response.blob();
     const formData = new FormData();
-    formData.append('file', blob, file.name);
-    this.uploadData(formData);
+
+
+    const obj =
+    {
+      base64: file.base64,
+      extension: '.jpeg',
+      filename: file.name
+    };
+
+
+    //console.log(formData);
+
+    this.uploadData(obj);
   }
 
   // Upload the formData to our API
-  async uploadData(formData: FormData) {
+  async uploadData(formData) {
     const loading = await this.loadingCtrl.create({
       message: 'Uploading image...',
     });
     await loading.present();
 
-    // Use your own API!
-    const url = 'http://localhost:8888/images/upload.php';
-
-    this.http.post(url, formData)
+    this.postImageService.getImagesUrl(formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
         })
       )
-      .subscribe(res => {
-        if (res['success']) {
-          this.presentToast('File upload complete.');
-        } else {
-          this.presentToast('File upload failed.');
-        }
-      });
+      .subscribe(
+        (res) => {
+          this.postImageService.postImage(res.data.url);
+
+          //-------------------------------------------Handle error need to be added on plugin --------------------------------
+          // .subscribe(
+          //   (data: any) => {
+          //     console.log(data);
+          //     loading.dismiss();
+          //     this.presentToast('Image uploaded!');
+          //   },
+          //   error => {
+          //     console.log(error);
+          //     loading.dismiss();
+          //     this.presentToast('Error while uploading file!');
+          //   }
+          // );
+        },
+      );
+
+    // Use your own API!
+    // const url = 'https://plugins.livestorm.co/api/v1/medias';
+
+    // this.http.post(url, formData)
+    //   .pipe(
+    //     finalize(() => {
+    //       loading.dismiss();
+    //     })
+    //   )
+    //   .subscribe(res => {
+    //     if (res) {
+    //       this.presentToast('File upload complete.');
+    //     } else {
+    //       this.presentToast('File upload failed.');
+    //     }
+    //   });
+
   }
+
+
 
   async deleteImage(file: LocalFile) {
     await Filesystem.deleteFile({
