@@ -4,6 +4,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
 // import { lastValueFrom } from 'rxjs';
 
+
+//Import copmponent
+import { FileSenderComponent } from '../file-sender/file-sender.component';
+
+
 //importing chat services
 import { PubsubService } from 'src/app/core/services/post/pubsub.service';
 
@@ -23,7 +28,10 @@ export class TextMessageComponent implements OnInit {
 
   constructor(
     public pubsubService: PubsubService,
+    public fileSenderComponent: FileSenderComponent,
   ) { }
+
+  ngOnInit() { }
 
   uploadMessage(chatMessage) {
 
@@ -39,7 +47,10 @@ export class TextMessageComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
+  fileSend() {
+    this.fileSenderComponent.selectImage();
+  }
+
 
 
 }

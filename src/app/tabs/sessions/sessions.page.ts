@@ -47,26 +47,7 @@ export class SessionsPage implements OnInit {
   async ngOnInit() {
   }
 
-  //Button click upload function
 
-
-  //----------------Services function------------------------
-  uploadImage(gallary, camera) {
-    console.log(gallary, camera);
-    if (gallary === null) {
-      this.pubsubService.sendImages(this.postImageService.capturedBase64String);
-      console.log(this.postImageService.capturedBase64String);
-    } else {
-      this.pubsubService.sendImages(this.base64String);
-    }
-  }
-
-
-  //----------------capasitor/cordova function-----------------
-  takeFromCamera() {
-    this.postImageService.getFromCamera();
-    //console.log (this.apiService.capturedBase64String);
-  }
 
   //----------------Test list of sessions------------------------
 

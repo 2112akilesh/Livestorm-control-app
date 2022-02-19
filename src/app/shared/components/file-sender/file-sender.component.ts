@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Animation, createAnimation } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { finalize } from 'rxjs/operators';
-
 import { AlertController } from '@ionic/angular';
 
 //impoet service
@@ -39,6 +39,7 @@ export class FileSenderComponent implements OnInit {
   async ngOnInit() {
     this.loadFiles();
   }
+
 
   async loadFiles() {
     this.images = [];

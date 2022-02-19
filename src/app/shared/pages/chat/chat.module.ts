@@ -28,6 +28,7 @@ import { GamingModalComponent } from '../../components/gaming-modal/gaming-modal
     GamingModalComponent
   ],
   providers: [
+    FileSenderComponent
   ]
 })
 export class ChatPageModule { }
