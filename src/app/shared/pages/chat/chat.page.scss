@@ -1,3 +1,16 @@
+.header-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 40px;
+  
+    ion-avatar {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+    }
+  }
+  
 ion-footer{
     padding-bottom: 4px;
 }
