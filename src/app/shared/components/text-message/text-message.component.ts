@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
@@ -7,12 +7,14 @@ import { IonContent } from '@ionic/angular';
 //importing chat services
 import { PubsubService } from 'src/app/core/services/post/pubsub.service';
 
+
 @Component({
   selector: 'app-text-message',
   templateUrl: './text-message.component.html',
   styleUrls: ['./text-message.component.scss'],
 })
 export class TextMessageComponent implements OnInit {
+
 
   @Input() orgId = '';
   @Input() ionContent: IonContent;
@@ -24,6 +26,8 @@ export class TextMessageComponent implements OnInit {
   constructor(
     public pubsubService: PubsubService,
   ) { }
+
+  ngOnInit() { }
 
   uploadMessage(chatMessage) {
 
@@ -39,7 +43,8 @@ export class TextMessageComponent implements OnInit {
 
   }
 
-  ngOnInit() { }
+  openSelect() {
+  }
 
 
 }

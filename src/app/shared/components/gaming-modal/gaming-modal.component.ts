@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { IonSelect } from '@ionic/angular';
 
 //Importing services
 import { GamesService } from '../../../core/services/games/games.service';
+
+import { TextareaToolsService } from 'src/app/core/services/textarea-toolbar/textarea-tools.service';
 
 @Component({
   selector: 'app-gaming-modal',
@@ -12,11 +14,19 @@ import { GamesService } from '../../../core/services/games/games.service';
 export class GamingModalComponent implements OnInit {
 
   @ViewChild('gameList') selectRef: IonSelect;
+  @Input() childMessage: string;
+
   showList = true;
 
-  constructor(private gamesService: GamesService) { }
 
-  ngOnInit() { }
+  constructor(
+    private gamesService: GamesService,
+    public textareaToolsService: TextareaToolsService
+  ) {
+  }
+
+  ngOnInit() {
+  }
 
   openSelect() {                   //Function to show the game selection menu
     this.selectRef.open();
@@ -35,5 +45,7 @@ export class GamingModalComponent implements OnInit {
       alert('Something is not Daijobu');
     }
   }
+
+
 
 }

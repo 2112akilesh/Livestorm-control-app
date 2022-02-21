@@ -12,18 +12,13 @@
       <ion-icon slot="icon-only" name="add-circle-outline" color="primary"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-textarea
-    autoGrow
-    rows="1"
-    cols="10"
-    [placeholder]="'message'"
-    [formControl]="messageControl"
-    class="message-textarea"
-  ></ion-textarea>
+  <ion-textarea autoGrow rows="1" cols="10" [placeholder]="'message'" [formControl]="messageControl"
+  class="message-textarea"></ion-textarea>
   <ion-buttons slot="end">
-    <ion-button>
+    <app-gaming-modal></app-gaming-modal>
+    <!-- <ion-button>
       <ion-icon slot="icon-only" name="game-controller-outline" color="primary"></ion-icon>
-    </ion-button>
+    </ion-button> -->
     <ion-button (mousedown)="uploadMessage($event)" *ngIf="messageControl.valid">
       <ion-icon slot="icon-only" name="send" color="primary"></ion-icon>
     </ion-button>
@@ -32,4 +27,3 @@
     </ion-button>
   </ion-buttons>
 </ion-toolbar>
-

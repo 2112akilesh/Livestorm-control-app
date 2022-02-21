@@ -7,7 +7,7 @@ import { PubsubService } from './services/post/pubsub.service';
 import { PostImageService } from './services/postImage/post-image.service';
 import { GamesService } from './services/games/games.service';
 import { AuthenticationService } from './services/authentication/authentication.service';
-
+import { TextareaToolsService } from './services/textarea-toolbar/textarea-tools.service';
 @NgModule({
   imports: [
     CommonModule
@@ -18,7 +18,8 @@ import { AuthenticationService } from './services/authentication/authentication.
     PostImageService,
     PubsubService,
     GamesService,
-    AuthenticationService
+    AuthenticationService,
+    TextareaToolsService
   ]
 })
 

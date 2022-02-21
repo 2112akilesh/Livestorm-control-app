@@ -9,8 +9,9 @@ import { ChatPageRoutingModule } from './chat-routing.module';
 import { ChatPage } from './chat.page';
 
 import { FileSenderComponent } from '../../components/file-sender/file-sender.component';
-import { TextMessageComponent } from '../../components/text-message/text-message.component';
+
 import { GamingModalComponent } from '../../components/gaming-modal/gaming-modal.component';
+import { TextMessageComponent } from '../../components/text-message/text-message.component';
 
 
 @NgModule({
@@ -19,13 +20,13 @@ import { GamingModalComponent } from '../../components/gaming-modal/gaming-modal
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ChatPageRoutingModule
+    ChatPageRoutingModule,
   ],
   declarations: [
     ChatPage,
     FileSenderComponent,
-    TextMessageComponent,
-    GamingModalComponent
+    GamingModalComponent,
+    TextMessageComponent
   ],
   providers: [
   ]

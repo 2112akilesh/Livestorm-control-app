@@ -1,5 +1,5 @@
-<ion-button class="game-controller" (click)="openSelect()">
-  <ion-icon name="game-controller"></ion-icon>
+<ion-button (click)="openSelect()">
+  <ion-icon slot="icon-only" name="game-controller-outline" color="primary"></ion-icon>
 </ion-button>
 <ion-select [(ngModel)]="choices" (ionChange)="startGame(choices)" [hidden]='showList' #gameList>
   <ion-select-option value="game-1">Checkers</ion-select-option>

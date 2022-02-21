@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-//IMporting Guards
+//Importing Guards
 import { AutoLoginGuard } from './core/guard/auth-login/auto-login.guard';
 import { AuthGuard } from './core/guard/auth/auth.guard';
 import { IntroGuard } from './core/guard/intro-guard/intro.guard';
