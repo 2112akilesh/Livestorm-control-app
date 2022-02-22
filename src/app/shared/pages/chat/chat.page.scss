@@ -4,6 +4,9 @@ ion-content {
   background-size: cover;
 }
 
+ion-toolbar{
+  --background:  linear-gradient(to right, #C8D8DB , #D0DDDF);
+}
 .header-info {
     display: flex;
     align-items: center;
