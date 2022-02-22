@@ -17,7 +17,7 @@ export class GamingModalComponent implements OnInit {
   @Input() childMessage: string;
 
   showList = true;
-
+  choices = null;
 
   constructor(
     private gamesService: GamesService,
