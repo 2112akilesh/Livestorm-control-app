@@ -6,7 +6,7 @@
     </ion-buttons>
 
     <ion-title>
-      <svg width="222px" viewBox="0 0 922 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="11rem" viewBox="0 0 922 155" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M214.245 29.2669V132.135H285.183V111.619H238.228V29.2669H214.245Z" fill="#12262B" />
         <path
           d="M299.464 44.437C301.776 46.7486 304.954 47.9045 308.711 47.9045C312.467 47.9045 315.501 46.7486 317.957 44.437C320.269 42.1254 321.569 39.0913 321.569 35.3349C321.569 31.723 320.269 28.689 317.957 26.3773C315.501 24.0657 312.467 22.7654 308.711 22.7654C304.954 22.7654 301.776 24.0657 299.464 26.3773C297.008 28.689 295.852 31.723 295.852 35.3349C295.852 39.0913 297.008 42.1254 299.464 44.437ZM298.019 58.1623V132.135H319.402V58.1623H298.019Z"
@@ -61,21 +61,17 @@
 
 <ion-content fullscreen="true" scrollY="false" [style.--background]="scanActive?'#00000000':'#e7f0ff'">
 
-
-
-  <ion-row class="ion-justify-content-center" [hidden]="scanActive">
-    <ion-col size="6">
-      <ion-button (click)="startScan()" class="qr-button" fill="outline" color="livestorm-prime">
-        <ion-icon name="qr-code-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
+  <div style="display: flex; justify-content: center;">
+    <ion-button [hidden]="scanActive" (click)="startScan()" class="qr-button" fill="outline" color="livestorm-prime">
+      <ion-icon name="qr-code-outline"></ion-icon>
+    </ion-button>
+  </div>
 
   <div class="scan-box" [hidden]="!scanActive"></div>
 
   <ion-row class="qr-cancel" [hidden]="!scanActive">
     <ion-col class="ion-no-padding">
-      <ion-button  expand="full" color="tertiary" (click)="stopScan()">
+      <ion-button expand="full" color="tertiary" (click)="stopScan()">
         Cancel
       </ion-button>
     </ion-col>
