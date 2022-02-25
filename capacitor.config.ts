@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.control.app',
+  appId: 'com.livestorm.control',
   appName: 'control',
   webDir: 'www',
   bundledWebRuntime: false

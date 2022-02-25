@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController, Platform, IonRouterOutlet } from '@ionic/angular';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private platform: Platform,
+    private navCtrl: NavController
+  ) {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      //this.navCtrl.navigateBack('/tabs/events');
+      this.navCtrl.back();
+    });
+  }
+
+
 
   ngOnInit() {
   }

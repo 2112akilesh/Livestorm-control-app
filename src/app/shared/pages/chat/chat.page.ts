@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TabsPage } from '../../../tabs/tabs.page';
+import { NavController, Platform } from '@ionic/angular';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -15,8 +17,15 @@ export class ChatPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private tabsPage: TabsPage
-  ) { }
+    private tabsPage: TabsPage,
+    private platform: Platform,
+    private navCtrl: NavController
+  ) {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      this.navCtrl.navigateBack('/tabs/sessions');
+      this.tabsPage.setSelectedTab();
+    });
+  }
 
   ngOnInit() {
     this.organizationId = this.route.snapshot.paramMap.get('session-id');
