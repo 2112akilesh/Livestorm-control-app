@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>videocam</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="!session">
+
+  <div id="img-div"><img src="../../../../../assets/images/livestorm-logo.png" /></div>
+
+  <h1 align="center" id="title">Join video session</h1>
+  <ion-item>
+    <ion-label position="floating">Participant</ion-label>
+    <ion-input [(ngModel)]="myUserName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Session</ion-label>
+    <ion-input [(ngModel)]="mySessionId"></ion-input>
+  </ion-item>
+
+  <ion-button id="join-button" [disabled]="!mySessionId && !myUserName" (click)="joinSession()" expand="block"
+    shape="round" color="primary">
+    <ion-icon slot="start" name="videocam"></ion-icon>
+    Join
+  </ion-button>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button id="settings-button" [disabled]="!mySessionId && !myUserName" (click)="presentSettingsAlert()"
+      size="small" color="dark">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+
+<ion-content [scrollEvents]="true" (ionScroll)="refreshVideos()" *ngIf="session">
+  <div id="session-header">
+    <h1 id="session-title">{{mySessionId}}</h1>
+  </div>
+
+  <ion-grid>
+    <!--Subscribers and Publishers-->
+    <ion-row>
+      <ion-col size="6">
+        <div *ngIf="publisher" class="stream-container">
+          <user-video [streamManager]="publisher"></user-video>
+        </div>
+      </ion-col>
+
+      <ion-col size="6" *ngFor="let sub of subscribers">
+        <div class="stream-container">
+          <user-video [streamManager]="sub"></user-video>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button size="small" color="danger" (click)="leaveSession()">
+      <ion-icon name="power"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

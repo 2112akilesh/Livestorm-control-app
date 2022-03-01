@@ -19,7 +19,7 @@ export class ChatPage implements OnInit {
     private router: Router,
     private tabsPage: TabsPage,
     private platform: Platform,
-    private navCtrl: NavController
+    public navCtrl: NavController
   ) {
     this.platform.backButton.subscribeWithPriority(0, () => {
       this.navCtrl.navigateBack('/tabs/sessions');
@@ -36,6 +36,11 @@ export class ChatPage implements OnInit {
 
   setSelectedTab() {
     this.tabsPage.setSelectedTab();
+  }
+
+
+  goToVideoCam() {
+    this.navCtrl.navigateForward('/tabs/sessions/chat/' + this.organizationId + '/videocam');
   }
 
 
