@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.livestorm.control" version="0.0.1"
     xmlns="http://www.w3.org/ns/widgets"
-    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
     <name>Control</name>
     <description>mobile application to control livestorm.</description>
     <author email="2112akilesh@gmail.com" href="https://github.com/Akilesh2112/Livestorm-control-app">Akilesh and Michaël</author>

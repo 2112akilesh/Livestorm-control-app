@@ -3,7 +3,7 @@ import { StreamManager } from 'openvidu-browser';
 
 
 @Component({
-    selector: 'user-video',
+    selector: 'app-user-video',
     styles: [
         `
             ov-video {

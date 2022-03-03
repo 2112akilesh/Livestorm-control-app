@@ -171,6 +171,41 @@ export class VideocamPage implements OnInit, OnDestroy {
     }
   }
 
+  async presentSettingsAlert() {
+    const alert = await this.alertController.create({
+      header: 'OpenVidu Server config',
+      inputs: [
+        {
+          name: 'url',
+          type: 'text',
+          value: 'https://demos.openvidu.io',
+          placeholder: 'URL'
+        },
+        {
+          name: 'secret',
+          type: 'text',
+          value: 'MY_SECRET',
+          placeholder: 'Secret'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ok',
+          handler: data => {
+            this.OPENVIDU_SERVER_URL = data.url;
+            this.OPENVIDU_SERVER_SECRET = data.secret;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
   private checkAndroidPermissions(): Promise<void> {
     return new Promise((resolve, reject) => {
