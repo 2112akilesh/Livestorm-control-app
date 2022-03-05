@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode='ios'>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="!session">
+<ion-content class="ion-padding" *ngIf="!session" mode='md'>
 
   <div id="img-div"><img src="../../../../../assets/images/livestorm-logo.png" /></div>
 
@@ -37,7 +37,7 @@
 </ion-content>
 
 
-<ion-content [scrollEvents]="true" (ionScroll)="refreshVideos()" *ngIf="session">
+<ion-content [scrollEvents]="true" (ionScroll)="refreshVideos()" *ngIf="session" mode='md'>
   <div id="session-header">
     <h1 id="session-title">{{mySessionId}}</h1>
   </div>

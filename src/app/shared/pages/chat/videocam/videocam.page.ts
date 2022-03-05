@@ -20,8 +20,12 @@ declare let cordova;
 
 export class VideocamPage implements OnInit, OnDestroy {
 
-  OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
-  OPENVIDU_SERVER_SECRET = 'MY_SECRET';
+  // OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
+  // OPENVIDU_SERVER_SECRET = 'MY_SECRET';
+
+  OPENVIDU_SERVER_URL = 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com';
+  OPENVIDU_SERVER_SECRET = 'eycir9UiULq8QLc';
+
 
   ANDROID_PERMISSIONS = [
     this.androidPermissions.PERMISSION.CAMERA,
@@ -294,7 +298,7 @@ export class VideocamPage implements OnInit, OnDestroy {
        */
 
   private getToken(): Promise<string> {
-    if (this.platform.is('ios') && this.platform.is('cordova') && this.OPENVIDU_SERVER_URL === 'https://localhost:4443') {
+    if (this.platform.is('ios') && this.platform.is('cordova') && this.OPENVIDU_SERVER_URL === 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com/') {
       // To make easier first steps with iOS apps, use demos OpenVidu Sever if no custom valid server is configured
       this.OPENVIDU_SERVER_URL = 'https://demos.openvidu.io';
     }
