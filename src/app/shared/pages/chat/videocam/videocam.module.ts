@@ -13,12 +13,15 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
 import { OpenViduVideoComponent } from './ov-video.component';
 import { UserVideoComponent } from './user-video.component';
 
+import { CoreModule} from 'src/app/core/core.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VideocamPageRoutingModule
+    VideocamPageRoutingModule,
+    CoreModule
   ],
   declarations: [
     VideocamPage,

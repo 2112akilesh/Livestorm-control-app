@@ -9,6 +9,9 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
 import { OpenVidu, Publisher, Session, StreamEvent, StreamManager, Subscriber } from 'openvidu-browser';
 import { throwError as observableThrowError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+import { OpenViduService } from '../../../../core/services/open-vidu/open-vidu.service';
+
 declare let cordova;
 
 
@@ -20,11 +23,11 @@ declare let cordova;
 
 export class VideocamPage implements OnInit, OnDestroy {
 
-  // OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
-  // OPENVIDU_SERVER_SECRET = 'MY_SECRET';
+  OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
+  OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 
-  OPENVIDU_SERVER_URL = 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com';
-  OPENVIDU_SERVER_SECRET = 'eycir9UiULq8QLc';
+  // OPENVIDU_SERVER_URL = 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com';
+  // OPENVIDU_SERVER_SECRET = 'eycir9UiULq8QLc';
 
 
   ANDROID_PERMISSIONS = [
@@ -47,7 +50,8 @@ export class VideocamPage implements OnInit, OnDestroy {
     private platform: Platform,
     private androidPermissions: AndroidPermissions,
     private httpClient: HttpClient,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public openViduService: OpenViduService
 
   ) {
     this.initializeApp();
@@ -298,82 +302,12 @@ export class VideocamPage implements OnInit, OnDestroy {
        */
 
   private getToken(): Promise<string> {
-    if (this.platform.is('ios') && this.platform.is('cordova') && this.OPENVIDU_SERVER_URL === 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com/') {
+    if (this.platform.is('ios') && this.platform.is('cordova') && this.OPENVIDU_SERVER_URL === 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com') {
       // To make easier first steps with iOS apps, use demos OpenVidu Sever if no custom valid server is configured
       this.OPENVIDU_SERVER_URL = 'https://demos.openvidu.io';
     }
-    return this.createSession(this.mySessionId).then((sessionId) => {
-      return this.createToken(sessionId);
-    });
-  }
-
-
-  private createSession(sessionId) {
-    return new Promise((resolve, reject) => {
-      const body = JSON.stringify({ customSessionId: sessionId });
-      const options = {
-        headers: new HttpHeaders({
-          Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + this.OPENVIDU_SERVER_SECRET),
-          'Content-Type': 'application/json',
-        }),
-      };
-      return this.httpClient
-        .post(this.OPENVIDU_SERVER_URL + '/openvidu/api/sessions', body, options)
-        .pipe(
-          catchError((error) => {
-            if (error.status === 409) {
-              resolve(sessionId);
-            } else {
-              console.warn(
-                'No connection to OpenVidu Server. This may be a certificate error at ' +
-                this.OPENVIDU_SERVER_URL,
-              );
-              if (
-                window.confirm(
-                  'No connection to OpenVidu Server. This may be a certificate error at "' +
-                  this.OPENVIDU_SERVER_URL +
-                  // tslint:disable-next-line:max-line-length
-                  '"\n\nClick OK to navigate and accept it. If no certificate warning is shown, then check that your OpenVidu Server' +
-                  'is up and running at "' +
-                  this.OPENVIDU_SERVER_URL +
-                  '"',
-                )
-              ) {
-                location.assign(this.OPENVIDU_SERVER_URL + '/accept-certificate');
-              }
-            }
-            return observableThrowError(error);
-          }),
-        )
-        .subscribe((response) => {
-          console.log(response);
-          resolve(response['id']);
-        });
-    });
-  }
-
-  private createToken(sessionId): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const body = JSON.stringify({});
-      const options = {
-        headers: new HttpHeaders({
-          Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + this.OPENVIDU_SERVER_SECRET),
-          'Content-Type': 'application/json',
-        }),
-      };
-      return this.httpClient
-        .post(this.OPENVIDU_SERVER_URL + '/openvidu/api/sessions/' + sessionId + '/connection', body, options)
-        .pipe(
-          catchError((error) => {
-            reject(error);
-            return observableThrowError(error);
-          }),
-        )
-        .subscribe((response) => {
-          console.log(response);
-          resolve(response['token']);
-        });
-    });
+    return this.openViduService.createSession(this.mySessionId)
+      .then((sessionId) => this.openViduService.createToken(sessionId));
   }
 
 }
