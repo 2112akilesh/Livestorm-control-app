@@ -12,7 +12,7 @@ export class OpenViduService {
   OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 
 
-  // OPENVIDU_SERVER_URL = 'https://ec2-3-11-81-224.eu-west-2.compute.amazonaws.com';
+  // OPENVIDU_SERVER_URL = 'https://ec2-18-134-208-112.eu-west-2.compute.amazonaws.com';
   // OPENVIDU_SERVER_SECRET = 'eycir9UiULq8QLc';
 
   constructor(
