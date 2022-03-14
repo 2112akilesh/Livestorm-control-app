@@ -3,17 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { VideocamPageRoutingModule } from './videocam-routing.module';
-
-import { VideocamPage } from './videocam.page';
-
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 
-import { OpenViduVideoComponent } from './ov-video.component';
-import { UserVideoComponent } from './user-video.component';
+import { VideocamPageRoutingModule } from './videocam-routing.module';
+import { VideocamPage } from './videocam.page';
+import { CoreModule } from 'src/app/core/core.module';
 
-import { CoreModule} from 'src/app/core/core.module';
+import { StreamComponent } from '../shared/components/stream/stream.component';
+import { OpenViduVideoComponent } from '../shared/components/stream/ov-video.component';
+import { SettingUpModalComponent } from '../shared/components/setting-up-modal/setting-up-modal.component';
 
 @NgModule({
   imports: [
@@ -25,8 +23,9 @@ import { CoreModule} from 'src/app/core/core.module';
   ],
   declarations: [
     VideocamPage,
-    UserVideoComponent,
-    OpenViduVideoComponent
+    OpenViduVideoComponent,
+    StreamComponent,
+    SettingUpModalComponent
   ],
   providers: [
     AndroidPermissions

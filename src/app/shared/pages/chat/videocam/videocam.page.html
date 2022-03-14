@@ -7,62 +7,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="!session" mode='md'>
+<ion-content class="ion-padding" [scrollY]="false" [scrollX]="false" mode='md'>
 
   <div id="img-div"><img src="../../../../../assets/images/livestorm-logo.png" /></div>
+  <div id="layout" class="bounds">
+    <!-- Main video -->
+    <div *ngIf="localUser && localUser.streamManager" #mainStream class="OT_root OT_publisher OT_main custom-class"
+      id="localUser" (click)="toggleButtonsOrEnlargeStream($event)">
+      <stream-component #streamComponentLocal [user]="localUser"></stream-component>
+    </div>
+    <!-- Remotes -->
+    <div *ngFor="let user of this.remoteUsers" class="OT_root OT_publisher OT_remote custom-class" id="remoteUsers"
+      (click)="toggleButtonsOrEnlargeStream($event)">
+      <stream-component #streamComponentRemotes [user]="user"></stream-component>
+    </div>
+  </div>
 
-  <h1 align="center" id="title">Join video session</h1>
-  <ion-item>
-    <ion-label position="floating">Participant</ion-label>
-    <ion-input [(ngModel)]="myUserName"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Session</ion-label>
-    <ion-input [(ngModel)]="mySessionId"></ion-input>
-  </ion-item>
 
-  <ion-button id="join-button" [disabled]="!mySessionId && !myUserName" (click)="joinSession()" expand="block"
-    shape="round" color="primary">
-    <ion-icon slot="start" name="videocam"></ion-icon>
-    Join
-  </ion-button>
+  <ion-fab *ngIf="localUser &&  localUser.streamManager" vertical="top" horizontal="end" slot="fixed" id="rightButtons">
+    <ion-fab-button [@slideLeftRight]="buttonsVisibility" size="small" [color]="cameraBtnColor" id="camButton"
+      (click)="toggleCamera()">
+      <ion-icon name="camera-reverse-sharp"></ion-icon>
+    </ion-fab-button>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button id="settings-button" [disabled]="!mySessionId && !myUserName" (click)="presentSettingsAlert()"
-      size="small" color="dark">
-      <ion-icon name="settings"></ion-icon>
+    <ion-fab-button [@slideLeftRight]="buttonsVisibility" size="small" [color]="camBtnColor"
+      (click)="camStatusChanged()">
+      <ion-icon name="{{camBtnIcon}}"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button [@slideLeftRight]="buttonsVisibility" size="small" [color]="micBtnColor"
+      (click)="micStatusChanged()">
+      <ion-icon name="{{micBtnIcon}}"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button [@slideLeftRight]="buttonsVisibility" size="small" color="light" (click)="resetVideoSize()">
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button [@slideLeftRightChat]="chatNotification" size="small" [color]="chatBtnColor" (click)="toggleChat()">
+      <ion-icon name="chatbubbles"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-</ion-content>
-
-
-<ion-content [scrollEvents]="true" (ionScroll)="refreshVideos()" *ngIf="session" mode='md'>
-  <div id="session-header">
-    <h1 id="session-title">{{mySessionId}}</h1>
-  </div>
-
-  <ion-grid>
-    <!--Subscribers and Publishers-->
-    <ion-row>
-      <ion-col size="6">
-        <div *ngIf="publisher" class="stream-container">
-          <app-user-video [streamManager]="publisher"></app-user-video>
-        </div>
-      </ion-col>
-
-      <ion-col size="6" *ngFor="let sub of subscribers">
-        <div class="stream-container">
-          <app-user-video [streamManager]="sub"></app-user-video>
-        </div>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button size="small" color="danger" (click)="leaveSession()">
-      <ion-icon name="power"></ion-icon>
+  <ion-fab *ngIf="!setUpModalIsPresented" vertical="bottom" horizontal="center" id="exitButton"
+    [@slideTopBottom]="buttonsVisibility">
+    <ion-fab-button color="danger" (click)="exitSession()">
+      <ion-icon name="call"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 

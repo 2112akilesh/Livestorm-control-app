@@ -1,15 +1,17 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
-import { Platform, AlertController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-//import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-//import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { trigger, keyframes, state, style, transition, animate } from '@angular/animations';
+import { Platform, ModalController, AlertController } from '@ionic/angular';
 
-import { OpenVidu, Publisher, Session, StreamEvent, StreamManager, Subscriber } from 'openvidu-browser';
+import { OpenVidu, Session, Stream, StreamEvent, Publisher, SignalOptions, StreamManagerEvent } from 'openvidu-browser';
 
-
+import { UserModel } from '../shared/models/user-model';
+import { OpenViduLayout, OpenViduLayoutOptions } from '../shared/layout/openvidu-layout';
+import { StreamComponent } from '../shared/components/stream/stream.component';
+import { SettingUpModalComponent } from '../shared/components/setting-up-modal/setting-up-modal.component';
 import { OpenViduService } from '../../../../core/services/open-vidu/open-vidu.service';
+
 
 declare let cordova;
 
@@ -18,294 +20,468 @@ declare let cordova;
   selector: 'app-videocam',
   templateUrl: './videocam.page.html',
   styleUrls: ['./videocam.page.scss'],
+  animations: [
+    trigger('slideLeftRight', [
+      state(
+        'in',
+        style({
+          transform: 'translateX(0px)',
+        }),
+      ),
+      state(
+        'out',
+        style({
+          transform: 'translateX(100px)',
+        }),
+      ),
+      transition('in => out', animate('200ms', keyframes([style({ transform: 'translateX(100px)', display: 'none' })]))),
+      transition('out => in', animate('200ms', keyframes([style({ transform: 'translateX(0px)' })]))),
+    ]),
+    trigger('slideLeftRightChat', [
+      state(
+        'in',
+        style({
+          transform: 'translateX(0px)',
+        }),
+      ),
+      state(
+        'out',
+        style({
+          transform: 'translateX(100px)',
+        }),
+      ),
+      transition('in => out', animate('200ms', keyframes([style({ transform: 'translateX(100px)', display: 'none' })]))),
+      transition('out => in', animate('200ms', keyframes([style({ transform: 'translateX(0px)' })]))),
+    ]),
+    trigger('slideTopBottom', [
+      state(
+        'in',
+        style({
+          transform: 'translateY(0px)',
+        }),
+      ),
+      state(
+        'out',
+        style({
+          transform: 'translateY(100px)',
+        }),
+      ),
+      transition('in => out', animate('200ms', keyframes([style({ transform: 'translateY(100px)', display: 'none' })]))),
+      transition('out => in', animate('200ms', keyframes([style({ transform: 'translateY(0px)' })]))),
+    ]),
+  ],
 })
 
 export class VideocamPage implements OnInit, OnDestroy {
 
-  OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443';
-  OPENVIDU_SERVER_SECRET = 'MY_SECRET';
-
-  // OPENVIDU_SERVER_URL = 'https://ec2-18-134-208-112.eu-west-2.compute.amazonaws.com';
-  // OPENVIDU_SERVER_SECRET = 'eycir9UiULq8QLc';
-
-
-  ANDROID_PERMISSIONS = [
-    this.androidPermissions.PERMISSION.CAMERA,
-    this.androidPermissions.PERMISSION.RECORD_AUDIO,
-    this.androidPermissions.PERMISSION.MODIFY_AUDIO_SETTINGS
+  androidPermissions = [
+    'android.permission.CAMERA',
+    'android.permission.RECORD_AUDIO',
+    'android.permission.MODIFY_AUDIO_SETTINGS'
   ];
 
-  // OpenVidu objects
-  OV: OpenVidu;
-  session: Session;
-  publisher: StreamManager; // Local
-  subscribers: StreamManager[] = []; // Remotes
+  bigElementClass = 'OV_big';
 
-  // Join form
+  buttonsVisibility = 'in';
+  chatNotification = 'in';
+  cameraBtnColor = 'light';
+  camBtnColor = 'light';
+  camBtnIcon = 'videocam';
+  micBtnColor = 'light';
+  micBtnIcon = 'mic';
+  chatBtnColor = 'light';
+  bigElement: HTMLElement;
+  messageReceived = false;
+  messageList: { connectionId: string; message: string; userAvatar: string }[] = [];
+  modalIsPresented = false;
+  setUpModalIsPresented = true;
+  videoDevices: any[] = [];
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  OV: OpenVidu;
+  @ViewChild('mainStream', { static: false }) mainStream: ElementRef;
+  session: Session;
+  openviduLayout: OpenViduLayout;
+  openviduLayoutOptions: OpenViduLayoutOptions;
   mySessionId: string;
   myUserName: string;
+  localUser: UserModel;
+  remoteUsers: UserModel[];
+  resizeTimeout;
+
+  @ViewChildren('streamComponentRemotes') streamComponentRemotes: QueryList<StreamComponent>;
+  @ViewChild('streamComponentLocal', { static: false }) streamComponentLocal: StreamComponent;
 
   constructor(
-    private platform: Platform,
-    private androidPermissions: AndroidPermissions,
+    public platform: Platform,
+    private router: Router,
+    private route: ActivatedRoute,
+    public openViduService: OpenViduService,
+    public modalController: ModalController,
     public alertController: AlertController,
-    public openViduService: OpenViduService
+  ) { }
 
-  ) {
-    this.initializeApp();
-    this.generateParticipantInfo();
+
+  @HostListener('window:beforeunload')
+  beforeunloadHandler() {
+    this.exitSession();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      if (this.platform.is('ios') && this.platform.is('cordova')) {
-        cordova.plugins.iosrtc.registerGlobals();
+  @HostListener('window:resize', ['$event'])
+  sizeChange(event) {
+    clearTimeout(this.resizeTimeout);
+    this.updateLayout();
+  }
+
+  async ngOnInit() {
+    // Open modal to setting up the session
+    const modal = await this.modalController.create({
+      component: SettingUpModalComponent,
+      showBackdrop: false,
+      componentProps: {}
+    });
+
+    modal.onWillDismiss().then((data: any) => {
+      if (data.data && data.data.user) {
+        this.localUser = data.data.user;
+        this.videoDevices = data.data.videoDevices;
+        this.setUpModalIsPresented = false;
+        this.initApp();
+      } else {
+        // Go back
+        this.router.navigate(['/']);
+      }
+    });
+    return await modal.present().then(() => {
+      this.refreshVideos();
+    });
+  }
+
+  initApp() {
+    this.localUser.setType('local');
+    this.checkAudioButton();
+    this.checkVideoButton();
+    this.remoteUsers = [];
+    this.generateParticipantInfo();
+    this.openviduLayout = new OpenViduLayout();
+    this.openviduLayoutOptions = {
+      maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
+      minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
+      fixedRatio: false /* If this is true then the aspect ratio of the video is maintained
+    and minRatio and maxRatio are ignored (default false)*/,
+      bigClass: 'OV_big', // The class to add to elements that should be sized bigger
+      bigPercentage: 0.82, // The maximum percentage of space the big ones should take up
+      bigFixedRatio: false, // fixedRatio for the big ones
+      bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
+      bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
+      bigFirst: false, // Whether to place the big one in the top left (true) or bottom right
+      animate: false, // Whether you want to animate the transitions
+    };
+    this.openviduLayout.initLayoutContainer(document.getElementById('layout'), this.openviduLayoutOptions);
+    if (this.platform.is('cordova') && this.platform.is('ios')) {
+      setInterval(() => {
+        this.updateLayout();
+      }, 1000);
+    }
+
+    this.joinToSession();
+  }
+
+  ngOnDestroy() {
+    this.exitSession();
+  }
+
+  joinToSession() {
+    this.OV = new OpenVidu();
+    this.session = this.OV.initSession();
+    this.subscribeToUserChanged();
+    this.subscribeToStreamCreated();
+    this.subscribedToStreamDestroyed();
+    this.subscribedToChat();
+    this.connectToSession();
+  }
+
+  exitSession() {
+    if (this.session) {
+      this.session.disconnect();
+    }
+    this.remoteUsers = [];
+    this.session = null;
+    this.localUser = null;
+    this.OV = null;
+    this.openviduLayout = null;
+    this.router.navigate(['']);
+  }
+
+  resetVideoSize() {
+    const element = document.querySelector('.' + this.bigElementClass);
+    if (element) {
+      element.classList.remove(this.bigElementClass);
+      this.bigElement = undefined;
+      this.updateLayout();
+    }
+  }
+
+  checkVideoButton() {
+    if (this.localUser.isVideoActive()) {
+      this.camBtnIcon = 'videocam';
+      this.camBtnColor = 'light';
+    } else {
+      this.camBtnIcon = 'eye-off';
+      this.camBtnColor = 'primary';
+    }
+  }
+
+  checkAudioButton() {
+    if (this.localUser.isAudioActive()) {
+      this.micBtnIcon = 'mic';
+      this.micBtnColor = 'light';
+    } else {
+      this.micBtnIcon = 'mic-off';
+      this.micBtnColor = 'primary';
+    }
+  }
+
+  micStatusChanged(): void {
+    this.localUser.setAudioActive(!this.localUser.getStreamManager().stream.audioActive);
+    (<Publisher>this.localUser.getStreamManager()).publishAudio(this.localUser.isAudioActive());
+    this.checkAudioButton();
+  }
+
+  camStatusChanged(): void {
+    this.localUser.setVideoActive(!this.localUser.getStreamManager().stream.videoActive);
+    (<Publisher>this.localUser.getStreamManager()).publishVideo(this.localUser.isVideoActive());
+    this.checkVideoButton();
+  }
+
+  toggleCamera() {
+    if (this.platform.is('cordova')) {
+      if (this.videoDevices && this.videoDevices.length > 0) {
+        let videoSource: any;
+        // Select the first different device
+        videoSource = this.videoDevices.filter((device) => device.deviceId !== this.localUser.getVideoSource())[0];
+        console.log('SETTING DEVICE: ', videoSource);
+        this.localUser.setVideoSource(videoSource.deviceId);
+
+        this.localUser.setIsBackCamera(!this.localUser.isBackCamera());
+        this.session.unpublish(<Publisher>this.localUser.getStreamManager());
+
+        const publisher = this.OV.initPublisher(undefined, {
+          videoSource: this.localUser.getVideoSource(),
+          publishAudio: this.localUser.isVideoActive(),
+          publishVideo: this.localUser.isVideoActive(),
+          mirror: !this.localUser.isBackCamera()
+        });
+
+        this.cameraBtnColor = this.cameraBtnColor === 'light' ? 'primary' : 'light';
+        this.localUser.setStreamManager(null);
+        setTimeout(() => {
+          this.localUser.setStreamManager(publisher);
+          this.updateLayout();
+          this.session.publish(publisher);
+        });
+      }
+    }
+  }
+
+
+
+  public toggleButtons() {
+    this.buttonsVisibility = this.buttonsVisibility === 'in' ? 'out' : 'in';
+    this.chatNotification = this.buttonsVisibility;
+  }
+
+  public toggleButtonsOrEnlargeStream(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const path = event.path || event.composedPath();
+    const element: HTMLElement = path.filter((e: HTMLElement) => e.className && e.className.includes('OT_root'))[0];
+    if (this.bigElement && element === this.bigElement) {
+      this.toggleButtons();
+    } else if (this.bigElement !== element) {
+      if (this.bigElement) {
+        this.bigElement.classList.remove(this.bigElementClass);
+      } else {
+        this.toggleButtons();
+      }
+      element.classList.add(this.bigElementClass);
+      this.bigElement = element;
+    }
+    this.updateLayout();
+  }
+
+  private generateParticipantInfo() {
+    this.route.params.subscribe((params: Params) => {
+      this.mySessionId = params.roomName;
+      this.myUserName = 'OpenVidu_User' + Math.floor(Math.random() * 100000);
+    });
+  }
+
+  private deleteRemoteStream(stream: Stream): void {
+    const userStream = this.remoteUsers.filter((user: UserModel) => user.getStreamManager().stream === stream)[0];
+    const index = this.remoteUsers.indexOf(userStream, 0);
+    if (index > -1) {
+      this.remoteUsers.splice(index, 1);
+    }
+  }
+
+
+  private subscribeToUserChanged() {
+    this.session.on('signal:userChanged', (event: any) => {
+      const data = JSON.parse(event.data);
+      this.remoteUsers.forEach((user: UserModel) => {
+        if (user.getConnectionId() === event.from.connectionId) {
+          if (data.avatar !== undefined) {
+            user.setUserAvatar(data.avatar);
+          }
+        }
+      });
+    });
+  }
+
+  private subscribeToStreamCreated() {
+    this.session.on('streamCreated', (event: StreamEvent) => {
+      const subscriber = this.session.subscribe(event.stream, undefined);
+      subscriber.on('streamPlaying', (e: StreamManagerEvent) => {
+        this.updateLayout();
+        (<HTMLElement>subscriber.videos[0].video).parentElement.classList.remove('custom-class');
+      });
+      const newUser = new UserModel();
+      newUser.setStreamManager(subscriber);
+      newUser.setConnectionId(event.stream.connection.connectionId);
+      const nickname = event.stream.connection.data.split('%')[0];
+      try {
+        newUser.setNickname(JSON.parse(nickname).clientData);
+      } catch (err) {
+        newUser.setNickname(nickname);
+      }
+      newUser.setType('remote');
+      newUser.setUserAvatar(this.openViduService.getRandomAvatar());
+      this.remoteUsers.push(newUser);
+      this.sendSignalUserAvatar(this.localUser);
+      this.buttonsVisibility = 'out';
+      this.chatNotification = 'out';
+    });
+  }
+
+  private subscribedToStreamDestroyed() {
+    this.session.on('streamDestroyed', (event: StreamEvent) => {
+      this.deleteRemoteStream(event.stream);
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(() => {
+        this.updateLayout();
+      }, 20);
+      event.preventDefault();
+    });
+  }
+
+  private subscribedToChat() {
+    this.session.on('signal:chat', (event: any) => {
+      const data = JSON.parse(event.data);
+      const messageOwner =
+        this.localUser.getConnectionId() === data.connectionId
+          ? this.localUser
+          : this.remoteUsers.filter((user) => user.getConnectionId() === data.connectionId)[0];
+
+      this.messageList.push({
+        connectionId: data.connectionId,
+        message: data.message,
+        userAvatar: messageOwner.getAvatar(),
+      });
+
+      if (!this.modalIsPresented) {
+        this.chatBtnColor = 'secondary';
+        this.messageReceived = true;
+        this.chatNotification = 'in';
       }
     });
   }
 
-  ngOnInit() {
+  private sendSignalUserAvatar(user: UserModel): void {
+    const data = {
+      avatar: user.getAvatar(),
+    };
+    const signalOptions: SignalOptions = {
+      data: JSON.stringify(data),
+      type: 'userChanged',
+    };
+    this.session.signal(signalOptions);
   }
 
-
-  ngOnDestroy() {
-    // On component destroyed leave session
-    this.leaveSession();
+  private connectToSession(): void {
+    this.openViduService
+      .getToken(this.mySessionId)
+      .then((token) => {
+        this.connect(token);
+      })
+      .catch((error) => {
+        console.error('There was an error getting the token:', error.code, error.message);
+        this.openAlertError(error.message);
+      });
   }
 
+  private connect(token: string): void {
+    this.session
+      .connect(
+        token,
+        { clientData: this.myUserName },
+      )
+      .then(() => {
+        this.connectWebCam();
+      })
+      .catch((error) => {
+        console.error('There was an error connecting to the session:', error.code, error.message);
+        this.openAlertError(error.message);
+      });
+  }
 
-
-  joinSession() {
-    // --- 1) Get an OpenVidu object ---
-    this.OV = new OpenVidu();
-
-    // --- 2) Init a session ---
-    this.session = this.OV.initSession();
-
-    // --- 3) Specify the actions when events take place in the session ---
-    // On every new Stream received...
-    this.session.on('streamCreated', (event: StreamEvent) => {
-      // Subscribe to the Stream to receive it. Second parameter is undefined
-      // so OpenVidu doesn't create an HTML video on its own
-      const subscriber: Subscriber = this.session.subscribe(event.stream, undefined);
-      this.subscribers.push(subscriber);
+  private connectWebCam(): void {
+    this.localUser.setNickname(this.myUserName);
+    this.localUser.setConnectionId(this.session.connection.connectionId);
+    this.session.publish(<Publisher>this.localUser.getStreamManager());
+    this.localUser.getStreamManager().on('streamPlaying', () => {
+      (<HTMLElement>this.localUser.getStreamManager().videos[0].video).parentElement.classList.remove('custom-class');
+      this.updateLayout();
     });
+    this.localUser.setUserAvatar(this.openViduService.getRandomAvatar());
+    this.sendSignalUserAvatar(this.localUser);
+    this.updateLayout();
+  }
 
-    // On every Stream destroyed...
-    this.session.on('streamDestroyed', (event: StreamEvent) => {
-      // Remove the stream from 'subscribers' array
-      this.deleteSubscriber(event.stream.streamManager);
-    });
-
-    // On every asynchronous exception...
-    this.session.on('exception', (exception) => {
-      console.warn(exception);
-    });
-
-    // --- 4) Connect to the session with a valid user token ---
-    // 'getToken' method is simulating what your server-side should do.
-    // 'token' parameter should be retrieved and returned by your own backend
-    this.getToken().then((token) => {
-      // First param is the token got from OpenVidu Server. Second param will be used by every user on event
-      // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-      this.session
-        .connect(token, { clientData: this.myUserName })
-        .then(() => {
-          // --- 5) Requesting and Checking Android Permissions
-          if (this.platform.is('cordova')) {
-            // Ionic platform
-            if (this.platform.is('android')) {
-              console.log('Android platform');
-              this.checkAndroidPermissions()
-                .then(() => this.initPublisher())
-                .catch(err => console.error(err));
-            } else if (this.platform.is('ios')) {
-              console.log('iOS platform');
-              this.initPublisher();
+  private updateLayout() {
+    this.resizeTimeout = setTimeout(() => {
+      if (this.openviduLayout) {
+        this.openviduLayout.updateLayout();
+        if (this.platform.is('cordova') && this.platform.is('ios')) {
+          setTimeout(() => {
+            if (this.streamComponentLocal) {
+              this.streamComponentLocal.videoComponent.applyIosIonicVideoAttributes();
             }
-          } else {
-            this.initPublisher();
-          }
-        })
-        .catch(error => {
-          console.log('There was an error connecting to the session:', error.code, error.message);
-        });
-    });
+            if (this.streamComponentRemotes.length > 0) {
+              this.streamComponentRemotes.forEach((stream: StreamComponent) => {
+                stream.videoComponent.applyIosIonicVideoAttributes();
+              });
+            }
+          }, 250);
+        }
+      }
+    }, 20);
   }
 
-  initPublisher() {
-    // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-    // element: we will manage it on our own) and with the desired properties
-    const publisher: Publisher = this.OV.initPublisher(undefined, {
-      audioSource: undefined, // The source of audio. If undefined default microphone
-      videoSource: undefined, // The source of video. If undefined default webcam
-      publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-      publishVideo: true, // Whether you want to start publishing with your video enabled or not
-      resolution: '640x480', // The resolution of your video
-      frameRate: 30, // The frame rate of your video
-      insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-      mirror: true // Whether to mirror your local video or not
-    });
-
-    // --- 6) Publish your stream ---
-
-    this.session.publish(publisher).then(() => {
-      // Store our Publisher
-      this.publisher = publisher;
-    });
-  }
-
-
-  leaveSession() {
-    // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
-
-    if (this.session) {
-      this.session.disconnect();
-    }
-
-    // Empty all properties...
-    this.subscribers = [];
-    delete this.publisher;
-    delete this.session;
-    delete this.OV;
-    this.generateParticipantInfo();
-  }
-
-  refreshVideos() {
+  private refreshVideos() {
     if (this.platform.is('ios') && this.platform.is('cordova')) {
       cordova.plugins.iosrtc.refreshVideos();
     }
   }
 
-  async presentSettingsAlert() {
+  private async openAlertError(message: string) {
     const alert = await this.alertController.create({
-      header: 'OpenVidu Server config',
-      inputs: [
-        {
-          name: 'url',
-          type: 'text',
-          value: 'https://demos.openvidu.io',
-          placeholder: 'URL'
-        },
-        {
-          name: 'secret',
-          type: 'text',
-          value: 'MY_SECRET',
-          placeholder: 'Secret'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary'
-        }, {
-          text: 'Ok',
-          handler: data => {
-            this.OPENVIDU_SERVER_URL = data.url;
-            this.OPENVIDU_SERVER_SECRET = data.secret;
-          }
-        }
-      ]
+      header: 'Error occurred!',
+      subHeader: 'There was an error connecting to the session:',
+      message: message,
+      buttons: ['OK'],
     });
-
     await alert.present();
-  }
-
-
-  private checkAndroidPermissions(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.platform.ready().then(() => {
-        this.androidPermissions
-          .requestPermissions(this.ANDROID_PERMISSIONS)
-          .then(() => {
-            this.androidPermissions
-              .checkPermission(this.androidPermissions.PERMISSION.CAMERA)
-              .then(camera => {
-                this.androidPermissions
-                  .checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO)
-                  .then(audio => {
-                    this.androidPermissions
-                      .checkPermission(this.androidPermissions.PERMISSION.MODIFY_AUDIO_SETTINGS)
-                      .then(modifyAudio => {
-                        if (camera.hasPermission && audio.hasPermission && modifyAudio.hasPermission) {
-                          resolve();
-                        } else {
-                          reject(
-                            new Error(
-                              'Permissions denied: ' +
-                              '\n' +
-                              ' CAMERA = ' +
-                              camera.hasPermission +
-                              '\n' +
-                              ' AUDIO = ' +
-                              audio.hasPermission +
-                              '\n' +
-                              ' AUDIO_SETTINGS = ' +
-                              modifyAudio.hasPermission,
-                            ),
-                          );
-                        }
-                      })
-                      .catch(err => {
-                        console.error(
-                          'Checking permission ' +
-                          this.androidPermissions.PERMISSION.MODIFY_AUDIO_SETTINGS +
-                          ' failed',
-                        );
-                        reject(err);
-                      });
-                  })
-                  .catch(err => {
-                    console.error(
-                      'Checking permission ' + this.androidPermissions.PERMISSION.RECORD_AUDIO + ' failed',
-                    );
-                    reject(err);
-                  });
-              })
-              .catch(err => {
-                console.error('Checking permission ' + this.androidPermissions.PERMISSION.CAMERA + ' failed');
-                reject(err);
-              });
-          })
-          .catch(err => console.error('Error requesting permissions: ', err));
-      });
-    });
-  }
-
-
-  private generateParticipantInfo() {
-    // Random user nickname and sessionId
-    this.mySessionId = 'SessionA';
-    this.myUserName = 'Participant' + Math.floor(Math.random() * 100);
-  }
-
-  private deleteSubscriber(streamManager: StreamManager): void {
-    const index = this.subscribers.indexOf(streamManager, 0);
-    if (index > -1) {
-      this.subscribers.splice(index, 1);
-    }
-  }
-
-  /*
-       * --------------------------
-       * SERVER-SIDE RESPONSIBILITY
-       * --------------------------
-       * This method retrieve the mandatory user token from OpenVidu Server,
-       * in this case making use Angular http API.
-       * This behaviour MUST BE IN YOUR SERVER-SIDE IN PRODUCTION. In this case:
-       *   1) Initialize a Session in OpenVidu Server	(POST /openvidu/api/sessions)
-       *   2) Create a Connection in OpenVidu Server (POST /openvidu/api/sessions/<SESSION_ID>/connection)
-       *   3) The Connection.token must be consumed in Session.connect() method
-       */
-
-  private getToken(): Promise<string> {
-    if (this.platform.is('ios') && this.platform.is('cordova') && this.OPENVIDU_SERVER_URL === 'https://' + location.hostname + ':4443') {
-      // To make easier first steps with iOS apps, use demos OpenVidu Sever if no custom valid server is configured
-      this.OPENVIDU_SERVER_URL = 'https://demos.openvidu.io';
-    }
-    return this.openViduService.createSession(this.mySessionId)
-      .then((sessionId) => this.openViduService.createToken(sessionId));
   }
 
 }
