@@ -9,10 +9,10 @@ export class UserModel {
     private audioSource: string;
     private videoSource: string;
     private isBackCameraActive: boolean;
-    
+
     streamManager: StreamManager;
     connectionId: string;
-    
+
     constructor() {
         this.connectionId = '';
         this.nickname = '';

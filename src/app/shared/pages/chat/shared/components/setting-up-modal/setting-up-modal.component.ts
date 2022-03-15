@@ -21,7 +21,7 @@ export class SettingUpModalComponent implements OnInit {
 
     constructor(public modalController: ModalController, public platform: Platform,
         private openViduSrv: OpenViduService
-        ) {}
+    ) { }
 
     ngOnInit() {
         this.platform.ready().then(() => {
@@ -44,13 +44,14 @@ export class SettingUpModalComponent implements OnInit {
     initDevices() {
         this.OV.getDevices().then((devices: any) => {
             this.audioDevices = devices.filter((device) => device.kind === 'audioinput');
+            console.log("Audio device"+ JSON.stringify(this.audioDevices));
             this.videoDevices = devices.filter((device) => device.kind === 'videoinput');
             if (this.platform.is('cordova')) {
                 if (this.platform.is('ios')) {
                     console.log('iOS platform');
                     setTimeout(() => {
                         this.refreshVideos();
-                    },1100);
+                    }, 1100);
                 } else if (this.platform.is('android')) {
                     console.log('Android platform');
                 }
@@ -72,10 +73,10 @@ export class SettingUpModalComponent implements OnInit {
         this.localUser.setAudioActive(!!audioSource);
         this.localUser.setAudioSource(audioSource);
         if (!!audioSource) {
-          this.destroyPublisher();
-          this.initPublisher();
+            this.destroyPublisher();
+            this.initPublisher();
         } else {
-          this.micOff();
+            this.micOff();
         }
     }
 
@@ -108,7 +109,7 @@ export class SettingUpModalComponent implements OnInit {
     }
 
     join() {
-        this.modalController.dismiss({user: this.localUser, videoDevices: this.videoDevices});
+        this.modalController.dismiss({ user: this.localUser, videoDevices: this.videoDevices });
     }
 
     private initPublisher(): Promise<any> {

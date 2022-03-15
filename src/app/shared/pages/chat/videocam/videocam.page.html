@@ -44,9 +44,6 @@
       <ion-icon name="apps"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-button [@slideLeftRightChat]="chatNotification" size="small" [color]="chatBtnColor" (click)="toggleChat()">
-      <ion-icon name="chatbubbles"></ion-icon>
-    </ion-fab-button>
   </ion-fab>
 
   <ion-fab *ngIf="!setUpModalIsPresented" vertical="bottom" horizontal="center" id="exitButton"
