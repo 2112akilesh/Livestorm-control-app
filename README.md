@@ -28,35 +28,74 @@ Control is a new way to experience your video call and take advantage of your ex
 </p>
 
 
-## Features
+## Features ✨
+Here are some features that I planned for Flare. The ones implemented right now are marked. The fundamental idea is to make use of external handheld device.
 
-- Send you messages from thia app to Livestorm
+- Login with QR ✅
+- get and manage sessions from your mobile ✅
+- Create a quick meeting session
+- Send you messages from app to Livestorm web ✅
 - Share files and photos to Livestorm from mobile.
-- One tap play game.
+- One tap play game ✅
 
-## Tech
+### Log in with qr
+<p align="center">
+  <img src="https://i.ibb.co/db7Gmhb/Localhost-Pixel-2-2022-15-3-at-7-23-10-PM.jpg">
+</p>
 
-I uses a number of open source Tech to work in this project:
+### get and manage sessions
+<p align="center">
+  <img src="https://i.ibb.co/qpZMvsC/Localhost-Pixel-2-2022-15-3-at-7-21-54-PM.jpg">
+</p>
 
-- [Ionic] - Hybrid mobile app development
-- [Angular] - TypeScript-based free and open-source web application framework
-- [Typescript] - TypeScript is a strongly typed programming language which builds on JavaScript
-- [Cordova] - A package of injected code that allows the Cordova webview within which the app renders to communicate with the native platform
-- [Capacitor] - Plugins in Capacitor enable JavaScript to interface directly with Native APIs
+### Send messages & file
+<p align="center">
+  <img src="https://i.ibb.co/vP3NGrK/Localhost-Pixel-2-2022-15-3-at-7-22-00-PM.jpg">
+</p>
+
+### Create game
+<p align="center">
+  <img src="https://i.ibb.co/PTBgwjV/full-demo-4.jpg">
+</p>
 
 
-## Installation
+## Running Locally 💻
 
-Livestorm app requires [Node.js](https://nodejs.org/) v14+ to run.
-Android studio
-
-Install the dependencies and devDependencies and start the server.
-
+### 1. Clone the repo
 ```sh
-cd Livestorm-control-app
-npm i
-ionic start
+git clone https://github.com/Akilesh2112/Livestorm-control-app.git
 ```
+### 2.  Install the dependencies
+```sh
+npm install
+```
+### 3. Start up the app on web
+For UI:
+```sh
+ionic serve
+```
+UI: `http://localhost:8100`
+
+You are all set for exploring Livestorn Control locally.
+
+### 4. Run the app on android emulator (Bonus)
+<a href="https://bitter-card-93c.notion.site/How-to-Deploy-30b02179865e42e8a4c2e0f0cc55e6d5">Refer this document </a>
+
+## Links and References 🔗
+
+| Title                    | Link                                   | Description                                      |
+|--------------------------|----------------------------------------|--------------------------------------------------|
+| Ionic                    | https://ionicframework.com/docs/       | Native framework to build mobile apps            |
+| Angular                  | https://angular.io/                    | Front-end framework                              |
+| Livestorm SDK & API      | https://developers.livestorm.co/docs   | Deployment for UI                                |
+| Capacitor                | https://capacitorjs.com/docs           | Cross-platform Native Runtime                    |
+| Nx                       | https://nx.dev/#getting-started        | Build system with monorepo support               |
+
+To know more about the packages used:
+<a href="https://bitter-card-93c.notion.site/Packages-used-447c93e6dac14aeea71ce513b792edbe">Refer this link</a>
+
+
+
 
 
 ## Screen shots
