@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ionic build --prod && npx cap copy android && npx cap open android",
-    "dev":"ionic cap run android -l --external",
+    "dev": "ionic cap run android -l --external",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -64,6 +64,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "cordova-res": "0.15.4",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",

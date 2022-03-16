@@ -30,7 +30,7 @@ export class AuthPage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      apiToken: ['eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiMjQxOGUwMWEtNjJiNi00ZjMxLTkxMDAtNDM0MTUxNzg5ZmM1IiwiaWF0IjoxNjMxNjI3NzQxLCJvcmciOiI2ZTFmOWJiYy1kN2Y5LTQ5ZGEtODM2NC00NWZlZWY0YWI4YWQifQ.P9R_xgv-kG-FwT4h2BtrJCrE-QAtUt-rFOiBwOzBELM',
+      apiToken: ['',
       [Validators.required]]
     });
   }
