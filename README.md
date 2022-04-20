@@ -36,7 +36,7 @@ Here are some features that I planned for Flare. The ones implemented right now 
 - Create a quick meeting session
 - Send you messages from app to Livestorm web ✅
 - Share files and photos to Livestorm from mobile.
-- One tap play game ✅
+- One tap play game 
 
 ### Log in with qr
 <p align="center">
