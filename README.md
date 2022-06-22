@@ -38,25 +38,31 @@ Here are some features that I planned for Flare. The ones implemented right now 
 - Share files and photos to Livestorm from mobile.
 - One tap play game 
 
-### Log in with qr
-<p align="center">
-  <img src="https://i.ibb.co/db7Gmhb/Localhost-Pixel-2-2022-15-3-at-7-23-10-PM.jpg">
-</p>
+#### Control App Screenshots
+<table>
+  <tr>
+    <td>Log in with qr</td>
+     <td>get and manage sessions</td>
+     <td>Send messages & file</td>
+  </tr>
+  <tr>
+    <td><img src="https://i.ibb.co/db7Gmhb/Localhost-Pixel-2-2022-15-3-at-7-23-10-PM.jpg" width=270 height=480></td>
+    <td><img src="https://i.ibb.co/qpZMvsC/Localhost-Pixel-2-2022-15-3-at-7-21-54-PM.jpg" width=270 height=480></td>
+    <td><img src="https://i.ibb.co/vP3NGrK/Localhost-Pixel-2-2022-15-3-at-7-22-00-PM.jpg" width=270 height=480></td>
+  </tr>
+ </table>
+ 
+ 
+ <table>
+  <tr>
+     <td>Create game</td>
+  </tr>
+  <tr>
+    <td><img src="https://i.ibb.co/PTBgwjV/full-demo-4.jpg" ></td>
+  </tr>
+ </table>
+ 
 
-### get and manage sessions
-<p align="center">
-  <img src="https://i.ibb.co/qpZMvsC/Localhost-Pixel-2-2022-15-3-at-7-21-54-PM.jpg">
-</p>
-
-### Send messages & file
-<p align="center">
-  <img src="https://i.ibb.co/vP3NGrK/Localhost-Pixel-2-2022-15-3-at-7-22-00-PM.jpg">
-</p>
-
-### Create game
-<p align="center">
-  <img src="https://i.ibb.co/PTBgwjV/full-demo-4.jpg">
-</p>
 
 
 ## Running Locally 💻
