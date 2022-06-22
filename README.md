@@ -46,12 +46,11 @@ Here are some features that I planned for Flare. The ones implemented right now 
      <td>Send messages & file</td>
   </tr>
   <tr>
-    <td><img src="https://i.ibb.co/db7Gmhb/Localhost-Pixel-2-2022-15-3-at-7-23-10-PM.jpg" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/53332156/175037403-1d260b06-ed8e-4021-97d6-d3b0a7bcc3fb.jpg" width=270 height=480></td>
     <td><img src="https://i.ibb.co/qpZMvsC/Localhost-Pixel-2-2022-15-3-at-7-21-54-PM.jpg" width=270 height=480></td>
     <td><img src="https://i.ibb.co/vP3NGrK/Localhost-Pixel-2-2022-15-3-at-7-22-00-PM.jpg" width=270 height=480></td>
   </tr>
  </table>
- 
  
  <table>
   <tr>
